@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="MyLibrary/MyLibrary.csproj" />
+  <Project Path="NormalUncertainty/NormalUncertainty.csproj" />
+</Solution>
