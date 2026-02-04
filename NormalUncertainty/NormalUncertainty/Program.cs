@@ -1,38 +1,35 @@
 ﻿
 using MyLibrary;
+using OpenTkRenderer;
+using System.Globalization;
 using System.Numerics;
+using System.Reflection;
 
 namespace NormalUncertainty
 {
     internal class Program
     {
+        private static readonly Random _random = new Random();
+
         static void Main(string[] args)
         {
-            Vector2 reference;
-            Vector2 current;
-            
-            float step = 10f;
-            float shift = 90f;
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
-            reference = new Vector2(0f, 1f);
+            // Make 2 example quads
+            // Generate points within them randomly (use same method as original project) (consult AI for alternatives)
+            // Connect point pair into line, calculate its normal
+            // Update average normal. Update average deviation from average normal?
+            // Plot the CHANGE in average deviation as new samples are added.
+            // Observe it decreasing?
 
-            for (float angle = 0; angle < 360; angle += step)
+            // This line creates a new instance, and wraps the instance in a using statement so it's automatically disposed once we've exited the block.
+            using (Game game = new Game(800, 600, "LearnOpenTK"))
             {
-                float angleR = MathUtil.ToRadians(angle + shift);
-
-                current = new Vector2(
-                    MathF.Cos(angleR), 
-                    MathF.Sin(angleR));
-
-                float differenceR = AcosDifference(reference, current);
-                float difference = MathUtil.ToDegrees(differenceR);  
-                difference = MathF.Round(difference, 0);
-                Console.WriteLine(difference);
+                game.Run();
             }
+
         }
 
-
-
-
+        
     }
 }
