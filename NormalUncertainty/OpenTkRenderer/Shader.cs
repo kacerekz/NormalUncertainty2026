@@ -10,7 +10,7 @@ namespace OpenTkRenderer
 {
     public class Shader : IDisposable
     {
-        int Handle;
+        public int Handle;
 
         private bool disposedValue = false;
 
