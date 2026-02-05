@@ -11,7 +11,6 @@ namespace OpenTkRenderer
 {
     public class Game : GameWindow
     {
-        public CameraManager _cameraManager;
         public Scene _activeScene;
 
         public Game(int width, int height, string title)
@@ -27,7 +26,6 @@ namespace OpenTkRenderer
             base.OnLoad();
 
             GL.ClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-            GL.Enable(EnableCap.DepthTest);
         }
 
         protected override void OnUpdateFrame(FrameEventArgs args)
@@ -36,8 +34,7 @@ namespace OpenTkRenderer
 
             if (!IsFocused) return;
 
-            // Pass input to the manager
-            _cameraManager.Update(KeyboardState, MouseState, args.Time);
+            _activeScene.CameraManager.Update(KeyboardState, MouseState, args.Time);
 
             if (KeyboardState.IsKeyDown(Keys.Escape))
             {
@@ -53,15 +50,13 @@ namespace OpenTkRenderer
         protected override void OnRenderFrame(FrameEventArgs args)
         {
             base.OnRenderFrame(args);
+
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            GL.Disable(EnableCap.DepthTest);
-
-            _activeScene.Render(_cameraManager.ActiveCamera);
-
-            GL.Enable(EnableCap.DepthTest);
+            _activeScene?.Render();
 
             ScreenshotManager.ProcessCapture(Size.X, Size.Y);
+
             SwapBuffers();
         }
 
@@ -69,19 +64,18 @@ namespace OpenTkRenderer
         {
             base.OnFramebufferResize(e);
             GL.Viewport(0, 0, e.Width, e.Height);
-            _cameraManager.OnResize(e.Width, e.Height);
+            _activeScene.CameraManager.OnResize(e.Width, e.Height);
         }
 
         protected override void OnUnload()
         {
             base.OnUnload();
-            //shader.Dispose();
         }
 
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             base.OnMouseWheel(e);
-            _cameraManager.OnMouseWheel(e);
+            _activeScene.CameraManager.OnMouseWheel(e);
         }
     }
 }

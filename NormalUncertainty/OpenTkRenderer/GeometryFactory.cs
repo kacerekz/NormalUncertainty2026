@@ -6,6 +6,19 @@ namespace OpenTkRenderer
 {
     public static class GeometryFactory
     {
+        public static Mesh CreateCircleMesh(Vector2 center, float radius, int segments)
+        {
+            List<Vertex> verts = new List<Vertex>();
+            for (int i = 0; i <= segments; i++)
+            {
+                float angle = (float)i / segments * MathF.PI * 2;
+                float x = center.X + MathF.Cos(angle) * radius;
+                float y = center.Y + MathF.Sin(angle) * radius;
+                verts.Add(new Vertex(new Vector3(x, y, 0), Vector3.One, Vector2.Zero));
+            }
+            return new Mesh(verts.ToArray(), PrimitiveType.LineLoop);
+        }
+
         // Grid with colored axes (Vertex Colors)
         public static Mesh CreateCartesianGrid(int rangeX, int rangeY)
         {

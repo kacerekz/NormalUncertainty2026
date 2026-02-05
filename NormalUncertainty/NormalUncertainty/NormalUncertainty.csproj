@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ScottPlot" Version="5.1.57" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MyLibrary\MyLibrary.csproj" />
     <ProjectReference Include="..\OpenTkRenderer\OpenTkRenderer.csproj" />
   </ItemGroup>
