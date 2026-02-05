@@ -1,5 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL4;
-
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,6 +69,24 @@ namespace OpenTkRenderer
         public void Use()
         {
             GL.UseProgram(Handle);
+        }
+
+        public void SetMatrix4(string name, Matrix4 data)
+        {
+            int location = GL.GetUniformLocation(Handle, name);
+            GL.UniformMatrix4(location, false, ref data);
+        }
+
+        public void SetVector3(string name, Vector3 data)
+        {
+            int location = GL.GetUniformLocation(Handle, name);
+            GL.Uniform3(location, data);
+        }
+
+        public void SetVector4(string name, Vector4 data)
+        {
+            int location = GL.GetUniformLocation(Handle, name);
+            GL.Uniform4(location, data);
         }
 
         protected virtual void Dispose(bool disposing)
