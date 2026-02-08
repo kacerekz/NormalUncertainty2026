@@ -46,6 +46,13 @@ namespace MyLibrary
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float UnsignedUnitVectorAngularDifferenceFast(Vector2 u, Vector2 v)
+        {
+            float dot = Vector2.Dot(u, v);
+            return MathF.Acos(Math.Clamp(dot, -1f, 1f));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float UnsignedUnitVectorAngularDifferenceFast(Vector3 u, Vector3 v)
         {
             float dot = Vector3.Dot(u, v);

@@ -2,6 +2,7 @@
 using MyLibrary;
 using NormalUncertainty.Experiments;
 using NormalUncertainty.Experiments.Convergence;
+using NormalUncertainty.Experiments.Convergence._2D;
 using OpenTkRenderer;
 using System.Drawing;
 using System.Globalization;
@@ -25,8 +26,8 @@ namespace NormalUncertainty
             // Plot the CHANGE in average deviation as new samples are added.
             // Observe it decreasing?
 
-            var experiment = new Convergence2dExperiment2() { Width = 800 , Height = 600 };
-            experiment.Run("Random Sampling Demo");
+            var experiment = new Convergence2D();
+            experiment.Run();
 
         }
     }

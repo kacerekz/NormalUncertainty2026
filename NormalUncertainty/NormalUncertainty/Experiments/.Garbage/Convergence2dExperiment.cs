@@ -7,7 +7,7 @@ using System.Drawing.Drawing2D;
 
 namespace NormalUncertainty.Experiments.Convergence
 {
-    public class Convergence2dExperiment2 : Experiment
+    public class Convergence2dExperiment : Experiment
     {
         class Scenario
         {
