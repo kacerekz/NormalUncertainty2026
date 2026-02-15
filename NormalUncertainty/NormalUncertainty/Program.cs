@@ -3,7 +3,8 @@ using MyLibrary;
 using NormalUncertainty.Experiments;
 using NormalUncertainty.Experiments.Convergence;
 using NormalUncertainty.Experiments.Convergence._2D;
-using OpenTkRenderer;
+using NormalUncertainty.Experiments.Convergence._3D;
+using NormalUncertainty.Experiments.ML;
 using System.Drawing;
 using System.Globalization;
 using System.Numerics;
@@ -19,16 +20,11 @@ namespace NormalUncertainty
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
-            // Make 2 example quads
-            // Generate points within them randomly (use same method as original project) (consult AI for alternatives)
-            // Connect point pair into line, calculate its normal
-            // Update average normal. Update average deviation from average normal?
-            // Plot the CHANGE in average deviation as new samples are added.
-            // Observe it decreasing?
+            var generator = new RandomUncertaintyDatasetGenerator3D();
+            generator.GenerateParallel(1_000_000, "dataset_3d_1M.csv");
 
-            var experiment = new Convergence2D();
-            experiment.Run();
-
+            //var experiment = new Experiment09();
+            //experiment.Run();
         }
     }
 }

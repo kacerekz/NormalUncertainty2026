@@ -8,18 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Experiments\.Garbage\Convergence2dExperiment.cs" />
-    <Compile Include="Experiments\.Garbage\ConvergencePreliminaries.cs" />
-    <Compile Include="Experiments\.Garbage\SceneDemoExperiment.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.24.1" />
     <PackageReference Include="ScottPlot" Version="5.1.57" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MyLibrary\MyLibrary.csproj" />
-    <ProjectReference Include="..\OpenTkRenderer\OpenTkRenderer.csproj" />
   </ItemGroup>
 
 </Project>
