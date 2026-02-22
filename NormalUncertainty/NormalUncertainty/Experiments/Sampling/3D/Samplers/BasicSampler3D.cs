@@ -5,17 +5,21 @@ using System.Numerics;
 
 namespace NormalUncertainty.Experiments.Convergence._3D
 {
-    public class BasicSampler3D : ISamplingStrategy3D
+    public class BasicSampler3D : Sampler3D
     {
         private readonly Scenario3D _s;
         private readonly Random _r;
-        public List<Vector3> NormalHistory { get; } = new();
 
-        public BasicSampler3D(Scenario3D s, Random r) { _s = s; _r = r; }
+        public BasicSampler3D(Scenario3D s, Random r) 
+        { 
+            _s = s; 
+            _r = r; 
+        }
 
-        public int Sample(int count)
+        public override int Sample(int count)
         {
             int added = 0;
+        
             for (int i = 0; i < count; i++)
             {
                 Vector3 pA = RandomPoint(_s.BoundsAMin, _s.BoundsAMax);
@@ -33,6 +37,7 @@ namespace NormalUncertainty.Experiments.Convergence._3D
                     added++;
                 }
             }
+            
             return added;
         }
 
@@ -43,13 +48,6 @@ namespace NormalUncertainty.Experiments.Convergence._3D
                 min.Y + (float)_r.NextDouble() * (max.Y - min.Y),
                 min.Z + (float)_r.NextDouble() * (max.Z - min.Z)
             );
-        }
-
-        public Vector3 GetAverageNormal()
-        {
-            Vector3 sum = Vector3.Zero;
-            foreach (var n in NormalHistory) sum += n;
-            return Vector3.Normalize(sum);
         }
     }
 }

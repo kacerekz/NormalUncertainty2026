@@ -8,8 +8,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import copy # Import copy to save best weights
 
 # --- Configuration ---
-DATA_FILE = "dataset_3d_1M_R.csv"
-MODEL_FILE = "uncertainty_model_3d_BEST.pth" # Renamed to reflect it saves the best version
+DATA_FILE = "data/dataset_3d_ADAH_1M.csv"
 EPOCHS = 10000  # Set this very high; early stopping will handle the actual stop
 PATIENCE = 100  # Stop if loss doesn't improve for 100 epochs
 MIN_DELTA = 0.00001 # Minimum improvement required to reset patience

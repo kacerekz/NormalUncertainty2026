@@ -16,25 +16,54 @@ namespace NormalUncertainty.Experiments.Convergence._3D
 
         public Scenario3D(Random r)
         {
-            // Center A is origin
             Vector3 centerA = Vector3.Zero;
-
-            // Center B and C are random points on a sphere shell around A
             Vector3 centerB = GenerateRandomOffset(r);
             Vector3 centerC = GenerateRandomOffset(r);
 
-            // Generate the actual boxes
             (BoundsAMin, BoundsAMax) = GenerateBounds(r, centerA);
             (BoundsBMin, BoundsBMax) = GenerateBounds(r, centerB);
             (BoundsCMin, BoundsCMax) = GenerateBounds(r, centerC);
+        }
+
+        public Scenario3D(Vector3 aMin, Vector3 aMax, Vector3 bMin, Vector3 bMax, Vector3 cMin, Vector3 cMax)
+        {
+            BoundsAMin = aMin; BoundsAMax = aMax;
+            BoundsBMin = bMin; BoundsBMax = bMax;
+            BoundsCMin = cMin; BoundsCMax = cMax;
+        }
+
+        public Scenario3D Normalized()
+        {
+            Vector3 shift = -BoundsAMin;
+            float scale = 1.0f / (BoundsAMax.X - BoundsAMin.X);
+
+            Vector3 Norm(Vector3 v) => (v + shift) * scale;
+
+            // 2. Return new object
+            return new Scenario3D(
+                Norm(BoundsAMin), Norm(BoundsAMax),
+                Norm(BoundsBMin), Norm(BoundsBMax),
+                Norm(BoundsCMin), Norm(BoundsCMax)
+            );
+        }
+
+        public float[] GetNetworkInput()
+        {
+            return
+            [
+                BoundsAMax.Y - BoundsAMin.Y, // height
+                BoundsAMax.Z - BoundsAMin.Z, // depth
+                BoundsBMin.X, BoundsBMin.Y, BoundsBMin.Z,
+                BoundsBMax.X, BoundsBMax.Y, BoundsBMax.Z,
+                BoundsCMin.X, BoundsCMin.Y, BoundsCMin.Z,
+                BoundsCMax.X, BoundsCMax.Y, BoundsCMax.Z,
+            ];
         }
 
         private Vector3 GenerateRandomOffset(Random r)
         {
             Vector3 v;
             float sqMag;
-
-            // 1. Sample a point within the unit sphere (rejection sampling)
             do
             {
                 v = new Vector3(
@@ -43,16 +72,10 @@ namespace NormalUncertainty.Experiments.Convergence._3D
                     (float)r.NextDouble() * 2 - 1
                 );
                 sqMag = v.LengthSquared();
-
-                // Keep it if it's inside the unit sphere and not at the zero origin
             } while (sqMag > 1.0f || sqMag < 0.0001f);
 
-            // 2. Normalize to get a random direction
             Vector3 direction = v / MathF.Sqrt(sqMag);
-
-            // 3. Apply the desired range
             float distance = MinDist + (float)r.NextDouble() * (MaxDist - MinDist);
-
             return direction * distance;
         }
 

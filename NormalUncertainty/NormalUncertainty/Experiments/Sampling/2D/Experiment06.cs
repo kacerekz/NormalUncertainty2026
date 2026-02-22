@@ -34,8 +34,8 @@ namespace NormalUncertainty.Experiments.Convergence._2D
 
                 // 2. Initialize Samplers
                 // We compare the Ground Truth (Random) vs. the Optimized (Cached Halton)
-                ISamplingStrategy2D truthSampler = new BasicSampler2D(scenario, r);
-                ISamplingStrategy2D cachedSampler = new CachedHaltonSampler2D(scenario);
+                Sampler2D truthSampler = new BasicSampler2D(scenario, r);
+                Sampler2D cachedSampler = new CachedHaltonSampler2D(scenario);
 
                 // 3. Run for a set maximum number of samples (No Early Stopping)
                 truthSampler.Sample(maxSamples);

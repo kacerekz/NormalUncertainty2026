@@ -27,7 +27,7 @@ namespace NormalUncertainty.Experiments.Convergence._2D
             for (int i = 0; i < scenarioCount; i++)
             {
                 Scenario2D scenario = new(r);
-                ISamplingStrategy2D sampler = new BasicSampler2D(scenario, r);
+                Sampler2D sampler = new BasicSampler2D(scenario, r);
                 sampler.Sample(maxSamples);
             }
             sw.Stop();
@@ -39,7 +39,7 @@ namespace NormalUncertainty.Experiments.Convergence._2D
             for (int i = 0; i < scenarioCount; i++)
             {
                 Scenario2D scenario = new(r);
-                ISamplingStrategy2D sampler = new HaltonSampler2D(scenario);
+                Sampler2D sampler = new HaltonSampler2D(scenario);
                 sampler.Sample(maxSamples);
             }
             sw.Stop();

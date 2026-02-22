@@ -1,44 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyLibrary
 {
     public static class HaltonCache
     {
         private static float[][] _cache;
-        private const int MaxCachedSamples = 200_000;
+        private static int _sampleCount;
         private static bool _isInitialized = false;
 
-        public static void Initialize()
+        public static void Initialize(int dimensions, int samples = 50_000)
         {
-            if (_isInitialized) return;
+            _sampleCount = samples;
+            _cache = new float[dimensions][];
 
-            // 4 dimensions: Ax, Ay, Bx, By
-            _cache = new float[4][];
-            for (int d = 0; d < 4; d++) _cache[d] = new float[MaxCachedSamples];
+            int[] bases = GetPrimes(dimensions);
 
-            int[] bases = { 2, 3, 5, 7 };
-
-            for (int d = 0; d < 4; d++)
+            for (int d = 0; d < dimensions; d++)
             {
+                _cache[d] = new float[_sampleCount];
                 int b = bases[d];
-                for (int i = 0; i < MaxCachedSamples; i++)
+
+                for (int i = 0; i < _sampleCount; i++)
                 {
-                    // Use the math from your existing Halton helper
                     _cache[d][i] = Halton.Get(i + 1, b);
                 }
             }
+
             _isInitialized = true;
         }
 
-        public static float GetValue(int index, int dimension)
+        public static float Get(int index, int dimension)
         {
-            if (!_isInitialized) Initialize();
-            // Wrap around if we exceed cache size
-            return _cache[dimension][index % MaxCachedSamples];
+            if (!_isInitialized /*|| !InRange(index)*/)
+                return float.NaN;
+
+            // HACK: Call the manual calculation for that index instead?
+            // Or make cache dynamically sized?
+            return _cache[dimension][index % _sampleCount];
+        }
+
+        public static bool InRange(int index)
+        {
+            return index >= 0 && index < _sampleCount;
+        }
+
+        private static int[] GetPrimes(int n)
+        {
+            List<int> primes = new List<int>();
+            int num = 2;
+            while (primes.Count < n)
+            {
+                if (IsPrime(num)) primes.Add(num);
+                num++;
+            }
+            return primes.ToArray();
+        }
+
+        private static bool IsPrime(int number)
+        {
+            if (number < 2) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
+            for (int i = 3; i <= Math.Sqrt(number); i += 2)
+            {
+                if (number % i == 0) return false;
+            }
+            return true;
         }
     }
 }

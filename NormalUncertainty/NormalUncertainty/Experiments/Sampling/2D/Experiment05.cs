@@ -39,7 +39,7 @@ namespace NormalUncertainty.Experiments.Convergence._2D
             Console.WriteLine($"Net Speedup: {(double)randomTime / haltonTime:F2}x faster");
         }
 
-        private void RunConvergence(ISamplingStrategy2D s, int batch, float limit)
+        private void RunConvergence(Sampler2D s, int batch, float limit)
         {
             // Internal logic similar to Experiment 03
             s.Sample(batch);

@@ -1,4 +1,5 @@
 ﻿using MyLibrary;
+using NormalUncertainty.Experiments.Convergence._2D;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -97,7 +98,7 @@ namespace NormalUncertainty.Experiments.Convergence._3D
             Console.WriteLine();
         }
 
-        private void SampleUntil(ISamplingStrategy3D sampler)
+        private void SampleUntil(Sampler3D sampler)
         {
             Vector3 lastAverage;
             Vector3 currentAverage;

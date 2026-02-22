@@ -35,8 +35,8 @@ namespace NormalUncertainty.Experiments.Convergence._2D
                 Scenario2D scenario = new(r);
 
                 // 1. Initialize Strategies
-                ISamplingStrategy2D randomSampler = new BasicSampler2D(scenario, r);
-                ISamplingStrategy2D haltonSampler = new HaltonSampler2D(scenario);
+                Sampler2D randomSampler = new BasicSampler2D(scenario, r);
+                Sampler2D haltonSampler = new HaltonSampler2D(scenario);
 
                 // 2. Run both until they satisfy the condition
                 SampleUntil(randomSampler, samplesPerRun, maxChange);
@@ -96,7 +96,7 @@ namespace NormalUncertainty.Experiments.Convergence._2D
             Console.WriteLine();
         }
 
-        private void SampleUntil(ISamplingStrategy2D sampler, int batchSize, float maxChangeDegrees)
+        private void SampleUntil(Sampler2D sampler, int batchSize, float maxChangeDegrees)
         {
             Vector2 lastAverage;
             Vector2 currentAverage;

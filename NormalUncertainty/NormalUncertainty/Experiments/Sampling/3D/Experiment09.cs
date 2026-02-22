@@ -103,7 +103,7 @@ namespace NormalUncertainty.Experiments.Convergence._3D
         private void Warmup(NeuralUncertaintyEstimator3D net)
         {
             Scenario3D s = new Scenario3D(r);
-            HaltonCache3D.Initialize();
+            HaltonCache.Initialize(9, 1000);
             var h = new CachedHaltonSampler3D(s); h.Sample(100); CalculateUf(h.NormalHistory);
             var c = new CornerSampler3D(s); c.Sample(512); CalculateUf(c.NormalHistory);
             net.PredictUf(s);

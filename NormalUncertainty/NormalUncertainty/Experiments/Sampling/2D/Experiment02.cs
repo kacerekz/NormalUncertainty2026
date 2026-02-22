@@ -1,4 +1,5 @@
 ﻿using MyLibrary;
+using NormalUncertainty.Experiments.Convergence._3D;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,8 +34,8 @@ namespace NormalUncertainty.Experiments.Convergence._2D
                 Scenario2D scenario = new(r);
 
                 // 2. Initialize both strategies
-                ISamplingStrategy2D haltonSampler = new HaltonSampler2D(scenario);
-                ISamplingStrategy2D randomSampler = new BasicSampler2D(scenario, r);
+                Sampler2D haltonSampler = new HaltonSampler2D(scenario);
+                Sampler2D randomSampler = new BasicSampler2D(scenario, r);
 
                 // 3. Run both for the full sample count
                 haltonSampler.Sample(maxSamples);

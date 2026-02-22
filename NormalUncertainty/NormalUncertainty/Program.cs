@@ -1,9 +1,5 @@
 ﻿
 using MyLibrary;
-using NormalUncertainty.Experiments;
-using NormalUncertainty.Experiments.Convergence;
-using NormalUncertainty.Experiments.Convergence._2D;
-using NormalUncertainty.Experiments.Convergence._3D;
 using NormalUncertainty.Experiments.ML;
 using System.Drawing;
 using System.Globalization;
@@ -20,8 +16,8 @@ namespace NormalUncertainty
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
-            var generator = new RandomUncertaintyDatasetGenerator3D();
-            generator.GenerateParallel(1_000_000, "dataset_3d_1M.csv");
+            var generator = new AdaptiveHaltonDatasetGenerator3D();
+            generator.Generate(1_000_000, "dataset_3d_ADAH_1M.csv");
 
             //var experiment = new Experiment09();
             //experiment.Run();

@@ -11,6 +11,7 @@ namespace NormalUncertainty.Experiments.ML
     public class UncertaintyDatasetGenerator3D
     {
         private Random _r = new Random();
+
         // We use the Cached Halton sampler because it's validated & fast
         // 100k samples is overkill for training data; 5k-10k per scenario is usually enough for a stable mean
         // But let's stick to your "Convergence" logic to be safe.
@@ -21,7 +22,7 @@ namespace NormalUncertainty.Experiments.ML
             Console.WriteLine($"Generating {datasetSize} 3D scenarios for ML training...");
 
             // Ensure Cache is ready
-            HaltonCache3D.Initialize();
+            HaltonCache.Initialize(9);
 
             using (StreamWriter sw = new StreamWriter(outputPath))
             {

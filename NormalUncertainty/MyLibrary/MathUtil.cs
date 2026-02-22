@@ -10,6 +10,20 @@ namespace MyLibrary
 {
     public class MathUtil
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float UnsignedUnitVectorAngularDifferenceFast(Vector2 u, Vector2 v)
+        {
+            float dot = Vector2.Dot(u, v);
+            return MathF.Acos(Math.Clamp(dot, -1f, 1f));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float UnsignedUnitVectorAngularDifferenceFast(Vector3 u, Vector3 v)
+        {
+            float dot = Vector3.Dot(u, v);
+            return MathF.Acos(Math.Clamp(dot, -1f, 1f));
+
+        }
         public static float ToRadians(float angle)
         {
             return angle * (MathF.PI / 180f);
@@ -20,7 +34,8 @@ namespace MyLibrary
             return angle * (180f / MathF.PI);
         }
 
-        public static float UnsignedAngularDifference(Vector2 u, Vector2 v)
+        // This was used for testing something at some point...
+        private static float UnsignedAngularDifference(Vector2 u, Vector2 v)
         {
             var lenU = u.Length();
             var lenV = v.Length();
@@ -28,7 +43,8 @@ namespace MyLibrary
             return MathF.Acos(dot / (lenU * lenV));
         }
 
-        public static float UnsignedAngularDifference(Vector3 u, Vector3 v)
+        // This was used for testing something at some point...
+        private static float UnsignedAngularDifference(Vector3 u, Vector3 v)
         {
             float length = u.Length() * v.Length();
 
@@ -43,20 +59,6 @@ namespace MyLibrary
             float clamped = Math.Clamp(dot, -1f, 1f);
 
             return MathF.Acos(clamped);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float UnsignedUnitVectorAngularDifferenceFast(Vector2 u, Vector2 v)
-        {
-            float dot = Vector2.Dot(u, v);
-            return MathF.Acos(Math.Clamp(dot, -1f, 1f));
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float UnsignedUnitVectorAngularDifferenceFast(Vector3 u, Vector3 v)
-        {
-            float dot = Vector3.Dot(u, v);
-            return MathF.Acos(Math.Clamp(dot, -1f, 1f));
         }
     }
 }

@@ -104,7 +104,7 @@ namespace NormalUncertainty.Experiments.Convergence._2D
             Console.WriteLine($"99th %: {p99S:F2}");
         }
 
-        private void SampleUntil(ISamplingStrategy2D sampler, int samplesPerRun, float maxChangeDegrees)
+        private void SampleUntil(Sampler2D sampler, int samplesPerRun, float maxChangeDegrees)
         {
             Vector2 lastAverage;
             Vector2 currentAverage;

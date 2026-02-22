@@ -19,23 +19,8 @@ namespace NormalUncertainty.Experiments.ML
 
         public float PredictUf(Scenario3D s)
         {
-            // 1. Normalize strictly to match the Python training data
-            Vector3 shift = -s.BoundsAMin;
-            float scale = 1.0f / (s.BoundsAMax.X - s.BoundsAMin.X);
-
-            Vector3 aSize = (s.BoundsAMax - s.BoundsAMin) * scale;
-            Vector3 bMin = (s.BoundsBMin + shift) * scale;
-            Vector3 bMax = (s.BoundsBMax + shift) * scale;
-            Vector3 cMin = (s.BoundsCMin + shift) * scale;
-            Vector3 cMax = (s.BoundsCMax + shift) * scale;
-
-            // 2. Map the 14 Features
-            float[] inputData = new float[]
-            {
-                aSize.Y, aSize.Z,
-                bMin.X, bMin.Y, bMin.Z, bMax.X, bMax.Y, bMax.Z,
-                cMin.X, cMin.Y, cMin.Z, cMax.X, cMax.Y, cMax.Z
-            };
+            // 1. Normalize and Extract Features in one go
+            float[] inputData = s.Normalized().GetNetworkInput();
 
             // 3. Create Tensor [BatchSize=1, Features=14]
             var inputTensor = new DenseTensor<float>(inputData, new[] { 1, 14 });

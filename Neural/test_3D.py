@@ -7,10 +7,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # --- Configuration ---
-DATA_FILE = "dataset_3d_1M_R.csv"
-MODEL_FILE = "uncertainty_model_3d_LONGER_TRAINING.pth"
-EPOCHS = 3000  # More epochs for 3D complexity
-BATCH_SIZE = 1024
+DATA_FILE = "data/dataset_3d_ADAH_1M.csv"
+EPOCHS = 4000  # More epochs for 3D complexity
+BATCH_SIZE = 128
 LEARNING_RATE = 0.001
 
 # --- Neural Network (14 Inputs -> 1 Output) ---

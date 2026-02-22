@@ -110,7 +110,7 @@ namespace NormalUncertainty.Experiments.Convergence._3D
             Console.WriteLine();
         }
 
-        private void SampleUntilConvergence(ISamplingStrategy3D sampler)
+        private void SampleUntilConvergence(Sampler3D sampler)
         {
             Vector3 cur = Vector3.Zero;
             float diff;

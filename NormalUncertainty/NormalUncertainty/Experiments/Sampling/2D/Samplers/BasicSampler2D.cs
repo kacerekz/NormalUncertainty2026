@@ -9,12 +9,10 @@ using System.Threading.Tasks;
 
 namespace NormalUncertainty.Experiments.Convergence._2D
 {
-    public class BasicSampler2D : ISamplingStrategy2D
+    public class BasicSampler2D : Sampler2D
     {
         private readonly Scenario2D _scenario;
         private readonly Random _random;
-
-        public List<Vector2> NormalHistory { get; } = new();
 
         public BasicSampler2D(Scenario2D scenario, Random random)
         {
@@ -22,9 +20,10 @@ namespace NormalUncertainty.Experiments.Convergence._2D
             _random = random;
         }
 
-        public int Sample(int count)
+        public override int Sample(int count)
         {
             int samplesTaken = 0;
+
             while (samplesTaken < count)
             {
                 // Sample A
@@ -43,7 +42,7 @@ namespace NormalUncertainty.Experiments.Convergence._2D
                     _scenario.boundsBMin.Y + tBy * (_scenario.boundsBMax.Y - _scenario.boundsBMin.Y)
                 );
 
-                // Compute Normal
+                // Compute normal
                 Vector2 line = pB - pA;
                 Vector2 normal = new(-line.Y, line.X);
 
@@ -53,18 +52,8 @@ namespace NormalUncertainty.Experiments.Convergence._2D
                     samplesTaken++;
                 }
             }
+            
             return samplesTaken;
-        }
-
-        public Vector2 GetAverageNormal()
-        {
-            Vector2 average = Vector2.Zero;
-            for (int i = 0; i < NormalHistory.Count; i++)
-            {
-                average += NormalHistory[i];
-            }
-
-            return Vector2.Normalize(average);
         }
     }
 }

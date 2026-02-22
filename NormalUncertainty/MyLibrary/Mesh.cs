@@ -18,19 +18,6 @@ namespace MyLibrary
         public bool HasColors => Colors.Length == Vertices.Length && Vertices.Length > 0;
         public bool HasNormals => Normals.Length == Vertices.Length && Vertices.Length > 0;
 
-        //public Vector3 FaceNormal(int f)
-        //{
-        //    var face = Faces[f];
-
-        //    var v1 = Vertices[face.V1];
-        //    var v2 = Vertices[face.V2];
-        //    var v3 = Vertices[face.V3];
-
-        //    var normal = Vector3.Cross(v3 - v1, v2 - v1);
-        //    normal = Vector3.Normalize(normal);
-        //    return normal;
-        //}
-
         public static Mesh ConcatenateMeshes(Mesh[] meshes)
         {
             List<(int, int)> combinedLines = [];
@@ -117,6 +104,20 @@ namespace MyLibrary
                     sw.WriteLine($"f {f.V1 + 1} {f.V2 + 1} {f.V3 + 1}");
                 }
             }
+        }
+
+        // TODO: I don't like having this here, and I don't think I'm using it currently
+        private Vector3 FaceNormal(int f)
+        {
+            var face = Faces[f];
+
+            var v1 = Vertices[face.V1];
+            var v2 = Vertices[face.V2];
+            var v3 = Vertices[face.V3];
+
+            var normal = Vector3.Cross(v3 - v1, v2 - v1);
+            normal = Vector3.Normalize(normal);
+            return normal;
         }
     }
 
