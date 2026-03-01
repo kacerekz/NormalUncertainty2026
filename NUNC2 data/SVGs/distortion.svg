@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="180mm"
+   height="75mm"
+   viewBox="0 0 180 75.000001"
+   version="1.1"
+   id="svg907"
+   sodipodi:docname="distortion.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   inkscape:export-filename="distortion.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview909"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.3348858"
+     inkscape:cx="322.4995"
+     inkscape:cy="75.661903"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs904">
+    <marker
+       id="black-dot"
+       markerWidth="6"
+       markerHeight="6"
+       refX="6"
+       refY="6"
+       markerUnits="strokeWidth"
+       viewBox="0 0 9 9"
+       preserveAspectRatio="xMidYMid">
+      <circle
+         cx="6"
+         cy="6"
+         r="4.5"
+         fill="#000000"
+         id="circle2" />
+    </marker>
+    <marker
+       id="red-dot"
+       markerWidth="6"
+       markerHeight="6"
+       refX="6"
+       refY="6"
+       markerUnits="strokeWidth"
+       viewBox="0 0 9 9"
+       preserveAspectRatio="xMidYMid">
+      <circle
+         cx="6"
+         cy="6"
+         r="4.5"
+         fill="#e31a1c"
+         id="circle5" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-20.207244,-13.223895)">
+    <g
+       id="g336"
+       transform="translate(-1.3611515)">
+      <path
+         id="line14"
+         style="fill:none;stroke:#000000;stroke-width:0.396875;stroke-dasharray:0.529167, 0.529167"
+         d="M 104.97479,20.135273 99.679844,26.47434"
+         sodipodi:nodetypes="cc" />
+      <path
+         id="polygon16"
+         style="fill:none;stroke:#000000;stroke-width:0.396875;marker-start:url(#black-dot);marker-mid:url(#black-dot);marker-end:url(#black-dot)"
+         d="M 70.426662,77.619283 33.219884,62.667043 26.605301,41.500377 29.568542,30.718606 36.183125,20.135273 48.089376,17.48944 l 11.906249,7.937499 10.583334,2.645834 10.583333,-2.645834 11.90625,-7.937499 11.906248,2.645833 6.61458,10.583333 2.32843,10.781771 -6.61458,21.166666 z"
+         sodipodi:nodetypes="ccccccccccccccc" />
+      <path
+         id="line14-8"
+         style="fill:none;stroke:#000000;stroke-width:0.396875;stroke-dasharray:0.529167, 0.529167"
+         d="M 70.426662,77.619283 65.131714,83.95835"
+         sodipodi:nodetypes="cc" />
+      <path
+         id="polygon18"
+         style="fill:none;stroke:#e31a1c;stroke-width:0.396999;stroke-dasharray:none;marker-start:url(#red-dot);marker-mid:url(#red-dot);marker-end:url(#red-dot)"
+         d="M 65.131714,83.95835 33.219884,62.667043 26.605301,41.500377 29.568542,30.718606 36.183125,20.135273 48.089376,17.48944 l 11.906249,7.937499 10.583334,2.645834 10.583333,-2.645834 11.90625,-7.937499 6.611302,8.9849 11.909526,4.244266 2.32843,10.781771 -6.61458,21.166666 z"
+         sodipodi:nodetypes="ccccccccccccccc" />
+      <line
+         x1="125.82406"
+         y1="40.490932"
+         x2="146.99071"
+         y2="40.490932"
+         style="fill:none;stroke:#000000;stroke-width:0.396875"
+         id="line20" />
+      <circle
+         cx="136.40738"
+         cy="40.490932"
+         r="1.190625"
+         fill="#000000"
+         id="circle22"
+         style="stroke-width:0.3;stroke-dasharray:none" />
+      <text
+         x="152.81157"
+         y="41.81385"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.264583"
+         id="text24">original surface</text>
+      <line
+         x1="125.82406"
+         y1="50.545097"
+         x2="146.99071"
+         y2="50.545097"
+         style="fill:none;stroke:#e31a1c;stroke-width:0.396875"
+         id="line26" />
+      <circle
+         cx="136.40738"
+         cy="50.545097"
+         r="1.190625"
+         fill="#e31a1c"
+         id="circle28"
+         style="stroke-width:0.3;stroke-dasharray:none" />
+      <text
+         x="152.81157"
+         y="51.868011"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.264583"
+         id="text30">distorted surface</text>
+      <line
+         x1="125.82406"
+         y1="60.599258"
+         x2="146.99071"
+         y2="60.599258"
+         style="fill:none;stroke:#000000;stroke-width:0.396875;stroke-dasharray:0.529167, 0.529167"
+         id="line32" />
+      <text
+         x="152.81157"
+         y="61.922173"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.264583"
+         id="text34">surface displacement</text>
+    </g>
+  </g>
+</svg>

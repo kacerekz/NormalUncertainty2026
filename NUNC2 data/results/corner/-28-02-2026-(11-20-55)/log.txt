@@ -1,0 +1,6 @@
+Input file: C:\Data\Common\lion.obj
+Initial precision: 0.05
+Target precision: 0
+Decrement by: 0.01
+Measurements: 16
+Corner sampler

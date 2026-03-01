@@ -1,0 +1,41 @@
+--- Bitrate & Comparisons for planck ---
+Baseline Bitrate: 12.42208685399882
+
+Versus Halton:
+  bits: 0.00%
+  DAME: -15.22%
+  DAME -p: -14.47%
+  FMPD: -13.79%
+  MSDM: -15.37%
+  MSDM2: -20.37%
+  MSE: +366.42%
+  MaxErr: +307.51%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Corner:
+  bits: 0.00%
+  DAME: -14.53%
+  DAME -p: -13.77%
+  FMPD: -14.18%
+  MSDM: -14.70%
+  MSDM2: -19.75%
+  MSE: +332.79%
+  MaxErr: +298.60%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Neural:
+  bits: 0.00%
+  DAME: +49.65%
+  DAME -p: +51.11%
+  FMPD: +59.66%
+  MSDM: +36.79%
+  MSDM2: +31.01%
+  MSE: +380.82%
+  MaxErr: +369.10%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%

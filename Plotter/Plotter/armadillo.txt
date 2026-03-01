@@ -1,0 +1,41 @@
+--- Bitrate & Comparisons for armadillo ---
+Baseline Bitrate: 12.617353058776489
+
+Versus Halton:
+  bits: 0.00%
+  DAME: +156.25%
+  DAME -p: +154.77%
+  FMPD: -50.53%
+  MSDM: -27.25%
+  MSDM2: -44.82%
+  MSE: +1119.90%
+  MaxErr: +572.99%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Corner:
+  bits: 0.00%
+  DAME: +161.52%
+  DAME -p: +159.73%
+  FMPD: -55.47%
+  MSDM: -27.12%
+  MSDM2: -44.62%
+  MSE: +1105.73%
+  MaxErr: +603.75%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Neural:
+  bits: 0.00%
+  DAME: +245.09%
+  DAME -p: +241.58%
+  FMPD: +71.78%
+  MSDM: -5.07%
+  MSDM2: -19.69%
+  MSE: +1287.01%
+  MaxErr: +606.74%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%

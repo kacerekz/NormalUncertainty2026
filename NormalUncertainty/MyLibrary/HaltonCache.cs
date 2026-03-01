@@ -7,7 +7,7 @@ namespace MyLibrary
     {
         private static float[][] _cache;
         private static int _sampleCount;
-        private static bool _isInitialized = false;
+        public static bool IsInitialized { get; private set; } = false;
 
         public static void Initialize(int dimensions, int samples = 50_000)
         {
@@ -27,12 +27,12 @@ namespace MyLibrary
                 }
             }
 
-            _isInitialized = true;
+            IsInitialized = true;
         }
 
         public static float Get(int index, int dimension)
         {
-            if (!_isInitialized /*|| !InRange(index)*/)
+            if (!IsInitialized /*|| !InRange(index)*/)
                 return float.NaN;
 
             // HACK: Call the manual calculation for that index instead?

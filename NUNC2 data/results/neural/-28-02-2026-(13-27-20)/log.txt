@@ -1,0 +1,6 @@
+Input file: C:\Data\Common\Simplified\armadillo2_10000.obj
+Initial precision: 0.008
+Target precision: 0
+Decrement by: 0.001
+Measurements: 16
+Corner sampler

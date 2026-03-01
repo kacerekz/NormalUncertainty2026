@@ -1,0 +1,41 @@
+--- Bitrate & Comparisons for fandisk ---
+Baseline Bitrate: 8.516447876447877
+
+Versus Halton:
+  bits: 0.00%
+  DAME: -48.25%
+  DAME -p: -48.79%
+  FMPD: -49.94%
+  MSDM: -20.50%
+  MSDM2: -20.86%
+  MSE: +786.71%
+  MaxErr: +310.72%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Corner:
+  bits: 0.00%
+  DAME: -45.64%
+  DAME -p: -46.23%
+  FMPD: -46.31%
+  MSDM: -20.15%
+  MSDM2: -20.27%
+  MSE: +556.17%
+  MaxErr: +310.72%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Neural:
+  bits: 0.00%
+  DAME: +11.48%
+  DAME -p: +10.90%
+  FMPD: +4.60%
+  MSDM: +0.09%
+  MSDM2: -0.33%
+  MSE: +535.15%
+  MaxErr: +311.43%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%

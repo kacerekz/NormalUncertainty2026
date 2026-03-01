@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 450"
+   width="100%"
+   height="100%"
+   version="1.1"
+   id="svg154"
+   sodipodi:docname="quantization.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   inkscape:export-filename="quantization.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview156"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.069499"
+     inkscape:cx="512.38945"
+     inkscape:cy="331.93112"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg154" />
+  <defs
+     id="defs14">
+    <marker
+       id="arrowRed"
+       markerWidth="12"
+       markerHeight="12"
+       refX="4"
+       refY="6"
+       orient="auto"
+       markerUnits="userSpaceOnUse">
+      <path
+         d="M 0 0 L 12 6 L 0 12 L 3 6 Z"
+         fill="#e60000"
+         id="path2" />
+    </marker>
+    <marker
+       id="arrowBlue"
+       markerWidth="12"
+       markerHeight="12"
+       refX="4"
+       refY="6"
+       orient="auto"
+       markerUnits="userSpaceOnUse">
+      <path
+         d="M 0,0 12,6 0,12 3,6 Z"
+         fill="#2196f3"
+         id="path5" />
+    </marker>
+    <marker
+       id="arrowRedSmall"
+       markerWidth="8"
+       markerHeight="8"
+       refX="6"
+       refY="4"
+       orient="auto"
+       markerUnits="userSpaceOnUse">
+      <path
+         d="M 0,0 8,4 0,8 2,4 Z"
+         fill="#e60000"
+         id="path8" />
+    </marker>
+    <clipPath
+       id="largeBoxClip">
+      <rect
+         x="360"
+         y="25"
+         width="415"
+         height="410"
+         rx="35"
+         id="rect11" />
+    </clipPath>
+  </defs>
+  <path
+     d="M 15 225 Q 30 300 15 430 Q 80 440 260 430 L 215 325 L 90 240 Z"
+     fill="#e0e0e0"
+     id="path16" />
+  <g
+     stroke="black"
+     stroke-width="1.5"
+     id="g40">
+    <line
+       x1="15"
+       y1="225"
+       x2="90"
+       y2="240"
+       id="line18" />
+    <line
+       x1="15"
+       y1="295"
+       x2="90"
+       y2="240"
+       id="line20" />
+    <line
+       x1="15"
+       y1="360"
+       x2="85"
+       y2="380"
+       id="line22" />
+    <line
+       x1="45"
+       y1="435"
+       x2="85"
+       y2="380"
+       id="line24" />
+    <line
+       x1="135"
+       y1="435"
+       x2="85"
+       y2="380"
+       id="line26" />
+    <line
+       x1="260"
+       y1="430"
+       x2="215"
+       y2="325"
+       id="line28" />
+    <line
+       x1="85"
+       y1="380"
+       x2="90"
+       y2="240"
+       id="line30" />
+    <line
+       x1="85"
+       y1="380"
+       x2="215"
+       y2="325"
+       id="line32" />
+    <line
+       x1="90"
+       y1="240"
+       x2="215"
+       y2="325"
+       id="line34" />
+    <line
+       x1="90"
+       y1="240"
+       x2="215"
+       y2="180"
+       id="line36" />
+    <line
+       x1="215"
+       y1="325"
+       x2="215"
+       y2="180"
+       id="line38" />
+  </g>
+  <g
+     stroke="black"
+     stroke-width="1.5"
+     stroke-dasharray="5,4"
+     id="g46">
+    <line
+       x1="90"
+       y1="240"
+       x2="260"
+       y2="210"
+       id="line42" />
+    <line
+       x1="215"
+       y1="325"
+       x2="260"
+       y2="210"
+       id="line44" />
+  </g>
+  <circle
+     cx="90"
+     cy="240"
+     r="2.5"
+     fill="black"
+     id="circle48" />
+  <circle
+     cx="85"
+     cy="380"
+     r="2.5"
+     fill="black"
+     id="circle50" />
+  <circle
+     cx="215"
+     cy="325"
+     r="2.5"
+     fill="black"
+     id="circle52" />
+  <circle
+     cx="215"
+     cy="180"
+     r="2.5"
+     fill="black"
+     id="circle54" />
+  <circle
+     cx="260"
+     cy="210"
+     r="2.5"
+     fill="black"
+     id="circle56" />
+  <line
+     x1="260"
+     y1="210"
+     x2="217"
+     y2="182"
+     stroke="#e60000"
+     stroke-width="1.5"
+     marker-end="url(#arrowRedSmall)"
+     id="line58" />
+  <rect
+     x="175"
+     y="120"
+     width="140"
+     height="140"
+     rx="15"
+     stroke="#e60000"
+     stroke-width="4"
+     fill="none"
+     id="rect60" />
+  <line
+     x1="315"
+     y1="190"
+     x2="360"
+     y2="190"
+     stroke="#e60000"
+     stroke-width="4"
+     id="line62" />
+  <g
+     clip-path="url(#largeBoxClip)"
+     id="g122">
+    <g
+       stroke="#d5d5d5"
+       stroke-width="3"
+       stroke-dasharray="4,4"
+       id="g96">
+      <line
+         x1="400"
+         y1="0"
+         x2="400"
+         y2="450"
+         id="line64" />
+      <line
+         x1="450"
+         y1="0"
+         x2="450"
+         y2="450"
+         id="line66" />
+      <line
+         x1="500"
+         y1="0"
+         x2="500"
+         y2="450"
+         id="line68" />
+      <line
+         x1="550"
+         y1="0"
+         x2="550"
+         y2="450"
+         id="line70" />
+      <line
+         x1="600"
+         y1="0"
+         x2="600"
+         y2="450"
+         id="line72" />
+      <line
+         x1="650"
+         y1="0"
+         x2="650"
+         y2="450"
+         id="line74" />
+      <line
+         x1="700"
+         y1="0"
+         x2="700"
+         y2="450"
+         id="line76" />
+      <line
+         x1="750"
+         y1="0"
+         x2="750"
+         y2="450"
+         id="line78" />
+      <line
+         x1="350"
+         y1="70"
+         x2="800"
+         y2="70"
+         id="line80" />
+      <line
+         x1="350"
+         y1="120"
+         x2="800"
+         y2="120"
+         id="line82" />
+      <line
+         x1="350"
+         y1="170"
+         x2="800"
+         y2="170"
+         id="line84" />
+      <line
+         x1="350"
+         y1="220"
+         x2="800"
+         y2="220"
+         id="line86" />
+      <line
+         x1="350"
+         y1="270"
+         x2="800"
+         y2="270"
+         id="line88" />
+      <line
+         x1="350"
+         y1="320"
+         x2="800"
+         y2="320"
+         id="line90" />
+      <line
+         x1="350"
+         y1="370"
+         x2="800"
+         y2="370"
+         id="line92" />
+      <line
+         x1="350"
+         y1="420"
+         x2="800"
+         y2="420"
+         id="line94" />
+    </g>
+    <g
+       stroke="black"
+       stroke-width="3.5"
+       id="g102">
+      <line
+         x1="360"
+         y1="250"
+         x2="490"
+         y2="185"
+         id="line98" />
+      <line
+         x1="490"
+         y1="450"
+         x2="490"
+         y2="185"
+         id="line100" />
+    </g>
+    <g
+       stroke="black"
+       stroke-width="3.5"
+       stroke-dasharray="12,10"
+       id="g108">
+      <line
+         x1="360"
+         y1="370"
+         x2="650"
+         y2="320"
+         id="line104" />
+      <line
+         x1="600"
+         y1="450"
+         x2="650"
+         y2="320"
+         id="line106" />
+    </g>
+    <line
+       x1="650"
+       y1="320"
+       x2="500"
+       y2="194"
+       stroke="#e60000"
+       stroke-width="3.5"
+       marker-end="url(#arrowRed)"
+       id="line110" />
+    <line
+       x1="650"
+       y1="320"
+       x2="509"
+       y2="179"
+       stroke="#2196F3"
+       stroke-width="3.5"
+       marker-end="url(#arrowBlue)"
+       id="line112" />
+    <circle
+       cx="490"
+       cy="185"
+       r="6"
+       fill="black"
+       id="circle114" />
+    <circle
+       cx="650"
+       cy="320"
+       r="6"
+       fill="black"
+       id="circle116" />
+    <circle
+       cx="500"
+       cy="170"
+       r="6"
+       fill="#7a7a7a"
+       id="circle118" />
+    <circle
+       cx="500"
+       cy="170"
+       r="4"
+       fill="#a0a0a0"
+       id="circle120" />
+  </g>
+  <rect
+     x="360"
+     y="25"
+     width="415"
+     height="410"
+     rx="35"
+     stroke="#e60000"
+     stroke-width="5"
+     fill="none"
+     id="rect124" />
+  <g
+     font-family="Times New Roman, serif"
+     font-size="28"
+     fill="black"
+     id="g152">
+    <text
+       x="450"
+       y="180"
+       font-style="italic"
+       id="text128">v<tspan
+   baseline-shift="sub"
+   font-size="18"
+   id="tspan126">i</tspan></text>
+    <text
+       x="670"
+       y="315"
+       font-style="italic"
+       id="text132">v<tspan
+   baseline-shift="sub"
+   font-size="18"
+   id="tspan130">i</tspan></text>
+    <line
+       x1="672.9668"
+       y1="295.58551"
+       x2="684.9668"
+       y2="295.58551"
+       stroke="#000000"
+       stroke-width="2"
+       id="line134" />
+    <text
+       x="505"
+       y="145"
+       font-style="italic"
+       id="text138">v<tspan
+   baseline-shift="sub"
+   font-size="18"
+   id="tspan136">i</tspan></text>
+    <path
+       d="M 507 126 L 513 119 L 519 126"
+       stroke="black"
+       stroke-width="2"
+       fill="none"
+       id="path140" />
+    <text
+       x="535"
+       y="270"
+       font-style="italic"
+       font-weight="bold"
+       id="text144">c<tspan
+   baseline-shift="sub"
+   font-size="18"
+   font-weight="normal"
+   id="tspan142">i</tspan></text>
+    <text
+       x="585"
+       y="225"
+       font-style="italic"
+       font-weight="bold"
+       id="text148">c<tspan
+   baseline-shift="sub"
+   font-size="18"
+   font-weight="normal"
+   id="tspan146">i</tspan></text>
+    <path
+       d="m 588.03516,207.84532 6,-7 6,7"
+       stroke="#000000"
+       stroke-width="2"
+       fill="none"
+       id="path150" />
+  </g>
+</svg>

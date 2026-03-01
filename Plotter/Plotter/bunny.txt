@@ -1,0 +1,41 @@
+--- Bitrate & Comparisons for bunny ---
+Baseline Bitrate: 13.62874251497006
+
+Versus Halton:
+  bits: +0.01%
+  DAME: +6.52%
+  DAME -p: +8.69%
+  FMPD: +108.16%
+  MSDM: -17.65%
+  MSDM2: -13.34%
+  MSE: +450.38%
+  MaxErr: +512.39%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Corner:
+  bits: +0.01%
+  DAME: +5.33%
+  DAME -p: +7.62%
+  FMPD: +146.63%
+  MSDM: -19.49%
+  MSDM2: -15.39%
+  MSE: +391.66%
+  MaxErr: +512.39%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Neural:
+  bits: +0.01%
+  DAME: +52.38%
+  DAME -p: +55.00%
+  FMPD: +312.29%
+  MSDM: +15.04%
+  MSDM2: +16.84%
+  MSE: +426.96%
+  MaxErr: +506.69%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%

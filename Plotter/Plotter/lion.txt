@@ -1,0 +1,41 @@
+--- Bitrate & Comparisons for lion ---
+Baseline Bitrate: 13.089923181201987
+
+Versus Halton:
+  bits: 0.00%
+  DAME: -5.69%
+  DAME -p: -5.30%
+  FMPD: -5.41%
+  MSDM: -22.03%
+  MSDM2: -16.09%
+  MSE: +300.93%
+  MaxErr: +285.14%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Corner:
+  bits: 0.00%
+  DAME: -3.88%
+  DAME -p: -3.35%
+  FMPD: -4.67%
+  MSDM: -19.82%
+  MSDM2: -13.79%
+  MSE: +249.06%
+  MaxErr: +285.14%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Neural:
+  bits: 0.00%
+  DAME: +28.88%
+  DAME -p: +29.99%
+  FMPD: +39.51%
+  MSDM: +2.28%
+  MSDM2: +7.46%
+  MSE: +275.84%
+  MaxErr: +313.52%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%

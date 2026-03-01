@@ -1,0 +1,6 @@
+Input file: C:\Data\Common\Simplified\bunny2_2000.obj
+Initial precision: 0.04
+Target precision: 0.001
+Decrement by: 0.005
+Measurements: 16
+Corner sampler
