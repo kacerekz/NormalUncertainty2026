@@ -1,0 +1,1 @@
+DameCL ma.obj mb.obj -p

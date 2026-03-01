@@ -1,0 +1,1 @@
+For proper function of visibility weighting term, SlimDX must be installed (http://slimdx.org/).
