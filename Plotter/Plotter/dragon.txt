@@ -1,0 +1,41 @@
+--- Bitrate & Comparisons for dragon ---
+Baseline Bitrate: 17.514764660263676
+
+Versus Halton:
+  bits: 0.00%
+  DAME: -17.27%
+  DAME -p: -17.33%
+  FMPD: -46.24%
+  MSDM: +13.47%
+  MSDM2: -18.55%
+  MSE: +288.56%
+  MaxErr: +714.54%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Corner:
+  bits: 0.00%
+  DAME: -17.51%
+  DAME -p: -17.63%
+  FMPD: -47.33%
+  MSDM: +13.12%
+  MSDM2: -20.09%
+  MSE: +260.91%
+  MaxErr: +714.54%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Neural:
+  bits: 0.00%
+  DAME: +72.41%
+  DAME -p: +72.08%
+  FMPD: +154.69%
+  MSDM: +32.88%
+  MSDM2: +86.79%
+  MSE: +888.49%
+  MaxErr: +716.28%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%

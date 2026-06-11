@@ -13,40 +13,35 @@ namespace Plotter
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
-            string name = "bunny";
-            int vertices = 1002;
-            string fileBase = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-14-47)\edgebreaker.metrics.txt";
-            string fileHalton = @"C:\Users\adria\Desktop\NUNC2 data\results\halton\-28-02-2026-(11-57-48)\nunc.predictor1.metrics.txt";
-            string fileCorner = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-14-47)\nunc.predictor1.metrics.txt";
-            string fileNeural = @"C:\Users\adria\Desktop\NUNC2 data\results\neural\-28-02-2026-(13-25-49)\nunc.predictor1.metrics.txt";
+            string baseResultsDir = @"C:\Users\adria\Desktop\Results (final)";
 
-            //string name = "lion";
-            //int vertices = 2213;
-            //string fileBase = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-20-55)\edgebreaker.metrics.txt";
-            //string fileHalton = @"C:\Users\adria\Desktop\NUNC2 data\results\halton\-28-02-2026-(12-07-27)\nunc.predictor1.metrics.txt";
-            //string fileCorner = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-20-55)\nunc.predictor1.metrics.txt";
-            //string fileNeural = @"C:\Users\adria\Desktop\NUNC2 data\results\neural\-28-02-2026-(13-31-34)\nunc.predictor1.metrics.txt";
-
-            //string name = "fandisk";
-            //int vertices = 6475;
-            //string fileBase = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-22-41)\edgebreaker.metrics.txt";
-            //string fileHalton = @"C:\Users\adria\Desktop\NUNC2 data\results\halton\-28-02-2026-(12-09-45)\nunc.predictor1.metrics.txt";
-            //string fileCorner = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-22-41)\nunc.predictor1.metrics.txt";
-            //string fileNeural = @"C:\Users\adria\Desktop\NUNC2 data\results\neural\-28-02-2026-(13-33-19)\nunc.predictor1.metrics.txt";
+            //string name = "bunny";
+            //int vertices = 1002;
 
             //string name = "armadillo";
             //int vertices = 5002;
-            //string fileBase = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-16-21)\edgebreaker.metrics.txt";
-            //string fileHalton = @"C:\Users\adria\Desktop\NUNC2 data\results\halton\-28-02-2026-(11-59-34)\nunc.predictor1.metrics.txt";
-            //string fileCorner = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-16-21)\nunc.predictor1.metrics.txt";
-            //string fileNeural = @"C:\Users\adria\Desktop\NUNC2 data\results\neural\-28-02-2026-(13-27-20)\nunc.predictor1.metrics.txt";
+
+            //string name = "lion";
+            //int vertices = 2213;
+
+            //string name = "fandisk";
+            //int vertices = 6475;
 
             //string name = "planck";
             //int vertices = 25445;
-            //string fileBase = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-26-15)\edgebreaker.metrics.txt";
-            //string fileHalton = @"C:\Users\adria\Desktop\NUNC2 data\results\halton\-28-02-2026-(12-13-58)\nunc.predictor1.metrics.txt";
-            //string fileCorner = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-26-15)\nunc.predictor1.metrics.txt";
-            //string fileNeural = @"C:\Users\adria\Desktop\NUNC2 data\results\neural\-28-02-2026-(13-36-32)\nunc.predictor1.metrics.txt";
+
+            string name = "neptune";
+            int vertices = 100192;
+
+            //string name = "dragon";
+            //int vertices = 100578;
+
+            string fileBase = FindFilePath(baseResultsDir, "corner", name, "edgebreaker.metrics.txt");
+            string fileCorner = FindFilePath(baseResultsDir, "corner", name, "nunc.predictor1.metrics.txt");
+            string fileHalton = FindFilePath(baseResultsDir, "halton", name, "nunc.predictor1.metrics.txt");
+            string fileNeural = FindFilePath(baseResultsDir, "neural", name, "nunc.predictor1.metrics.txt");
+
+            // ---------------------------------------------
 
             // Load metrics
             var metricsBase = new MetricsFile(fileBase);
@@ -176,6 +171,71 @@ namespace Plotter
             }
 
             return result;
+        }
+
+        public static string FindFilePath(string baseDir, string category, string folderSearchTerm, string fileName)
+        {
+            string categoryPath = Path.Combine(baseDir, category);
+
+            if (!Directory.Exists(categoryPath))
+            {
+                throw new DirectoryNotFoundException($"Could not find the category directory: {categoryPath}");
+            }
+
+            // Finds the first subfolder containing the search term 
+            string matchingFolder = Directory.GetDirectories(categoryPath, $"*{folderSearchTerm}*").FirstOrDefault();
+
+            if (matchingFolder == null)
+            {
+                throw new DirectoryNotFoundException($"No folder containing '{folderSearchTerm}' was found inside {categoryPath}");
+            }
+
+            string fullFilePath = Path.Combine(matchingFolder, fileName);
+
+            if (!File.Exists(fullFilePath))
+            {
+                throw new FileNotFoundException($"File missing: {fullFilePath}");
+            }
+
+            return fullFilePath;
+        }
+
+        public static void Old()
+        {
+            //string name = "bunny";
+            //int vertices = 1002;
+            //string fileBase = @"C:\Users\adria\Desktop\Results (final)\corner\-10-06-2026-(00-58-09)\edgebreaker.metrics.txt";
+            //string fileHalton = @"C:\Users\adria\Desktop\Results (final)\halton\-10-06-2026-(01-22-29)\nunc.predictor1.metrics.txt";
+            //string fileCorner = @"C:\Users\adria\Desktop\Results (final)\corner\-10-06-2026-(00-58-09)\nunc.predictor1.metrics.txt";
+            //string fileNeural = @"C:\Users\adria\Desktop\Results (final)\neural\-10-06-2026-(01-51-27)\nunc.predictor1.metrics.txt";
+
+            //string name = "lion";
+            //int vertices = 2213;
+            //string fileBase = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-20-55)\edgebreaker.metrics.txt";
+            //string fileHalton = @"C:\Users\adria\Desktop\NUNC2 data\results\halton\-28-02-2026-(12-07-27)\nunc.predictor1.metrics.txt";
+            //string fileCorner = @"C:\Users\adria\Desktop\NUNC2 data\results\corner\-28-02-2026-(11-20-55)\nunc.predictor1.metrics.txt";
+            //string fileNeural = @"C:\Users\adria\Desktop\NUNC2 data\results\neural\-28-02-2026-(13-31-34)\nunc.predictor1.metrics.txt";
+
+            //string name = "fandisk";
+            //int vertices = 6475;
+            //string fileBase = @"C:\Users\adria\Desktop\Results (final)\corner\-10-06-2026-(01-04-52)\edgebreaker.metrics.txt";
+            //string fileHalton = @"C:\Users\adria\Desktop\Results (final)\halton\-10-06-2026-(01-32-15)\nunc.predictor1.metrics.txt";
+            //string fileCorner = @"C:\Users\adria\Desktop\Results (final)\corner\-10-06-2026-(01-04-52)\nunc.predictor1.metrics.txt";
+            //string fileNeural = @"C:\Users\adria\Desktop\Results (final)\neural\-10-06-2026-(01-58-07)\nunc.predictor1.metrics.txt";
+
+            //string name = "armadillo";
+            //int vertices = 5002;
+            //string fileBase = @"C:\Users\adria\Desktop\Results (final)\corner\-10-06-2026-(00-59-42)\edgebreaker.metrics.txt";
+            //string fileHalton = @"C:\Users\adria\Desktop\Results (final)\halton\-10-06-2026-(01-24-03)\nunc.predictor1.metrics.txt";
+            //string fileCorner = @"C:\Users\adria\Desktop\Results (final)\corner\-10-06-2026-(00-59-42)\nunc.predictor1.metrics.txt";
+            //string fileNeural = @"C:\Users\adria\Desktop\Results (final)\neural\-10-06-2026-(01-52-55)\nunc.predictor1.metrics.txt";
+
+            //string name = "planck";
+            //int vertices = 25445;
+            //string fileBase = @"C:\Users\adria\Desktop\Results (final)\corner\-10-06-2026-(01-05-51)\edgebreaker.metrics.txt";
+            //string fileHalton = @"C:\Users\adria\Desktop\Results (final)\halton\-10-06-2026-(01-33-52)\nunc.predictor1.metrics.txt";
+            //string fileCorner = @"C:\Users\adria\Desktop\Results (final)\corner\-10-06-2026-(01-05-51)\nunc.predictor1.metrics.txt";
+            //string fileNeural = @"C:\Users\adria\Desktop\Results (final)\neural\-10-06-2026-(01-59-12)\nunc.predictor1.metrics.txt";
         }
     }
 }

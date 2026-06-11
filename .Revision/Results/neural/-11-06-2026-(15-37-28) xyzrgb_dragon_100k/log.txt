@@ -1,0 +1,7 @@
+Input file: E:\Workspaces\NormalUncertainty2026\.Revision\Data\xyzrgb_dragon_100k.obj
+Initial precision: 0.02
+Target precision: 0.001
+Decrement by: 0.002
+Measurements: 16
+UseHalton: True
+UseNeural: True

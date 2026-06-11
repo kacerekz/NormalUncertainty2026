@@ -20,8 +20,7 @@ namespace NormalUncertainty.Estimators
         public float Estimate(Scenario3D s)
         {
             float[] inputData = s.Normalized().GetNetworkInput();
-            var inputTensor = new DenseTensor<float>(inputData, new[] { 1, 14 });
-
+            var inputTensor = new DenseTensor<float>(inputData, new[] { 1, 15 });
             var inputs = new List<NamedOnnxValue>
             {
                 NamedOnnxValue.CreateFromTensor("input", inputTensor)

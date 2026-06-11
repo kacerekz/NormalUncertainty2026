@@ -1,0 +1,20 @@
+bunny   	.....   16.1449399s (0m 16s)
+armadillo       .....   76.7952829s (1m 16s)
+lion    	.....   30.7480765s (0m 30s)
+fandisk 	.....   65.1062917s (1m 5s)
+maxplanck       .....   283.2725707s (4m 43s)
+dragon  	.....   2029.3223291s (33m 49s)
+neptune 	.....   2629.9763476s (43m 49s)
+
+maxplanck:
+Neural utilization: 99.995974%
+
+dragon:
+Neural hitcount: 56083300
+Halton hitcount: 124571
+Neural utilization: 99.778374%
+
+neptune:
+Neural hitcount: 54837249
+Halton hitcount: 313500
+Neural utilization: 99.431558%

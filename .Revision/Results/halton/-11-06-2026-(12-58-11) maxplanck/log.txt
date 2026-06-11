@@ -1,0 +1,7 @@
+Input file: E:\Workspaces\NormalUncertainty2026\.Revision\Data\maxplanck.obj
+Initial precision: 0.005
+Target precision: 0
+Decrement by: 0.001
+Measurements: 16
+UseHalton: True
+UseNeural: False

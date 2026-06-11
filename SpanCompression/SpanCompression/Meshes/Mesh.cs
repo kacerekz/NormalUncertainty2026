@@ -145,9 +145,14 @@ namespace SpanCompression.Meshes
             // Step 2: generate inverted intensity-based color
             for (int i = 0; i < count; i++)
             {
-                double r = 1.0 - (maxX > 0 ? values[i][0] / maxX : 0);
-                double g = 1.0 - (maxY > 0 ? values[i][1] / maxY : 0);
-                double b = 1.0 - (maxZ > 0 ? values[i][2] / maxZ : 0);
+                double rRatio = maxX > 0 ? values[i][0] / maxX : 0;
+                double gRatio = maxY > 0 ? values[i][1] / maxY : 0;
+                double bRatio = maxZ > 0 ? values[i][2] / maxZ : 0;
+
+                // Invert and rigidly clamp between 0.0 and 1.0
+                double r = Math.Clamp(1.0 - rRatio, 0.0, 1.0);
+                double g = Math.Clamp(1.0 - gRatio, 0.0, 1.0);
+                double b = Math.Clamp(1.0 - bRatio, 0.0, 1.0);
 
                 colors[i] = new Vector3((float)r, (float)g, (float)b);
             }

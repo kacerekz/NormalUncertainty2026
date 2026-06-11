@@ -1,0 +1,41 @@
+--- Bitrate & Comparisons for neptune ---
+Baseline Bitrate: 16.98267326732673
+
+Versus Halton:
+  bits: 0.00%
+  DAME: -24.43%
+  DAME -p: -24.15%
+  FMPD: -45.02%
+  MSDM: +21.37%
+  MSDM2: -21.70%
+  MSE: +564.28%
+  MaxErr: +708.61%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Corner:
+  bits: 0.00%
+  DAME: -24.62%
+  DAME -p: -24.40%
+  FMPD: -43.20%
+  MSDM: +20.25%
+  MSDM2: -20.61%
+  MSE: +508.00%
+  MaxErr: +708.61%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%
+
+Versus Neural:
+  bits: 0.00%
+  DAME: +81.91%
+  DAME -p: +83.90%
+  FMPD: +195.78%
+  MSDM: +45.69%
+  MSDM2: +173.38%
+  MSE: +1365.00%
+  MaxErr: +727.99%
+  NUNC: -100.00%
+  Improvements: NaN%
+  Time: NaN%

@@ -28,14 +28,14 @@ namespace NormalUncertainty.Scenario
 
         public Scenario3D Generate()
         {
-            // 1. Generate Cell A (Natively Normalized)
-            // Min is explicitly locked to (0,0,0). Max X is explicitly locked to 1.0.
+            // 1. Generate Cell A
             Vector3 aMin = Vector3.Zero;
+            float aWidth = RandomFloat(_config.MinSize, _config.MaxSize);
             float aHeight = RandomFloat(_config.MinSize, _config.MaxSize);
             float aDepth = RandomFloat(_config.MinSize, _config.MaxSize);
-            Vector3 aMax = new Vector3(1.0f, aHeight, aDepth);
 
-            Vector3 centerA = new Vector3(0.5f, aHeight * 0.5f, aDepth * 0.5f);
+            Vector3 aMax = new Vector3(aWidth, aHeight, aDepth);
+            Vector3 centerA = aMax * 0.5f;
 
             // 2. Generate Cell B
             Vector3 centerB = centerA + GenerateRandomOffset();
@@ -45,7 +45,9 @@ namespace NormalUncertainty.Scenario
             Vector3 centerC = centerA + GenerateRandomOffset();
             (Vector3 cMin, Vector3 cMax) = GenerateBounds(centerC);
 
-            return new Scenario3D(aMin, aMax, bMin, bMax, cMin, cMax);
+            var s = new Scenario3D(aMin, aMax, bMin, bMax, cMin, cMax);
+
+            return s.Normalized();
         }
 
         private Vector3 GenerateRandomOffset()

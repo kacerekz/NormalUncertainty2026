@@ -151,19 +151,69 @@ namespace SpanCompression
             }
         }
 
+        //private bool IsWithinTrainingDistribution(Cell a, Cell b, Cell c)
+        //{
+        //    const float minSize = 0.01f;
+        //    const float maxSize = 10.0f;
+        //    const float minDistance = 0.01f;
+        //    const float maxDistance = 50.0f;
+
+        //    // Apply the new max-span scaling logic
+        //    float dx = a.SpanX.Size;
+        //    float dy = a.SpanY.Size;
+        //    float dz = a.SpanZ.Size;
+        //    float maxSpan = MathF.Max(dx, MathF.Max(dy, dz));
+        //    maxSpan = MathF.Max(maxSpan, 1e-7f);
+
+        //    float scale = 1.0f / maxSpan;
+
+        //    // Check A's dimensions (X is no longer guaranteed to be 1.0)
+        //    if (!IsInRange(dx * scale, minSize, maxSize)) return false;
+        //    if (!IsInRange(dy * scale, minSize, maxSize)) return false;
+        //    if (!IsInRange(dz * scale, minSize, maxSize)) return false;
+
+        //    // Check B's dimensions
+        //    if (!IsInRange(b.SpanX.Size * scale, minSize, maxSize)) return false;
+        //    if (!IsInRange(b.SpanY.Size * scale, minSize, maxSize)) return false;
+        //    if (!IsInRange(b.SpanZ.Size * scale, minSize, maxSize)) return false;
+
+        //    // Check C's dimensions
+        //    if (!IsInRange(c.SpanX.Size * scale, minSize, maxSize)) return false;
+        //    if (!IsInRange(c.SpanY.Size * scale, minSize, maxSize)) return false;
+        //    if (!IsInRange(c.SpanZ.Size * scale, minSize, maxSize)) return false;
+
+        //    // Check Distances from A's center
+        //    float distB = (b.Center - a.Center).Length() * scale;
+        //    if (!IsInRange(distB, minDistance, maxDistance)) return false;
+
+        //    float distC = (c.Center - a.Center).Length() * scale;
+        //    if (!IsInRange(distC, minDistance, maxDistance)) return false;
+
+        //    return true;
+        //}
+
         private bool IsWithinTrainingDistribution(Cell a, Cell b, Cell c)
         {
-            const float minSize = 0.01f;
-            const float maxSize = 10.0f;
-            const float minDistance = 0.01f;
-            const float maxDistance = 50.0f;
+            // NEW BOUNDS: 
+            // Min Ratio = 0.01 / 10.0 = 0.001
+            // Max Ratio = 10.0 / 0.01 = 1000.0
+            // Max Normalized Distance = 50.0 / 0.01 = 5000.0
+            const float minSize = 0.001f;
+            const float maxSize = 1000.0f;
+            const float minDistance = 0.0f;
+            const float maxDistance = 5000.0f;
 
-            float sizeX = Math.Max(a.SpanX.Size, 1e-7f);
-            float scale = 1.0f / sizeX;
+            float dx = Math.Max(a.SpanX.Size, 1e-7f);
+            float dy = Math.Max(a.SpanY.Size, 1e-7f);
+            float dz = Math.Max(a.SpanZ.Size, 1e-7f);
+            float maxSpan = MathF.Max(dx, MathF.Max(dy, dz));
 
-            // Check A's dimensions (Y, Z)
-            if (!IsInRange(a.SpanY.Size * scale, minSize, maxSize)) return false;
-            if (!IsInRange(a.SpanZ.Size * scale, minSize, maxSize)) return false;
+            float scale = 1.0f / maxSpan;
+
+            // Check A's dimensions
+            if (!IsInRange(dx * scale, minSize, maxSize)) return false;
+            if (!IsInRange(dy * scale, minSize, maxSize)) return false;
+            if (!IsInRange(dz * scale, minSize, maxSize)) return false;
 
             // Check B's dimensions
             if (!IsInRange(b.SpanX.Size * scale, minSize, maxSize)) return false;

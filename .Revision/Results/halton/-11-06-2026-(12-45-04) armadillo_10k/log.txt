@@ -1,0 +1,7 @@
+Input file: E:\Workspaces\NormalUncertainty2026\.Revision\Data\armadillo_10k.obj
+Initial precision: 0.008
+Target precision: 0
+Decrement by: 0.001
+Measurements: 16
+UseHalton: True
+UseNeural: False

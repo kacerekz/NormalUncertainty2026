@@ -29,13 +29,13 @@ Versus Corner:
 
 Versus Neural:
   bits: +0.01%
-  DAME: +52.38%
-  DAME -p: +55.00%
-  FMPD: +312.29%
-  MSDM: +15.04%
-  MSDM2: +16.84%
-  MSE: +426.96%
-  MaxErr: +506.69%
+  DAME: +34.06%
+  DAME -p: +36.75%
+  FMPD: +195.27%
+  MSDM: -5.84%
+  MSDM2: -3.48%
+  MSE: +486.92%
+  MaxErr: +591.57%
   NUNC: -100.00%
   Improvements: NaN%
   Time: NaN%

@@ -21,7 +21,7 @@ namespace SpanCompression
         private static float decrement;
         private static int measurements;
 
-        public static bool UseNeural { get; private set; } = false;
+        public static bool UseNeural { get; private set; } = true;
         public static bool UseHalton { get; private set; } = true;
 
         static Stopwatch sw = new();
@@ -29,17 +29,28 @@ namespace SpanCompression
         static void Main(string[] args)
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-            using var neuralNet = new NeuralUncertaintyEstimator("model/v7/uncertainty_model_3d.onnx");
+            using var neuralNet = new NeuralUncertaintyEstimator("model/v2/uncertainty_model_3d.onnx");
             NeuralNet = neuralNet;
 
-            //filename = @"C:\Data\Common\Simplified\bunny2_1000.obj";
-            //minPrecision = 0.1f;
-            //maxPrecision = 0f;
-            //decrement = 0.02f;
-            //measurements = 10;
-            //Experiment01();
+            var baseDir = @"E:\Workspaces\NormalUncertainty2026\.Revision\Data";
 
-            //filename = @"C:\Data\Common\Simplified\bunny2_2000.obj";
+            // Superfast test
+            //////////filename = baseDir + @"\bunny_closed_1k.obj";
+            //////////minPrecision = 0.1f;
+            //////////maxPrecision = 0f;
+            //////////decrement = 0.02f;
+            //////////measurements = 10;
+            //////////Experiment01();
+
+            // Helper for finding good parameters for new meshes being tested
+            //PrintPrecisionComparison("Bunny", baseDir + @"\bunny_2k.obj", 0.04f, 0.001f);
+            //PrintPrecisionComparison("Armadillo", baseDir + @"\armadillo_10k.obj", 0.008f, 0f);
+            //PrintPrecisionComparison("Lion", baseDir + @"\lion.obj", 0.05f, 0f);
+            //PrintPrecisionComparison("Fandisk", baseDir + @"\fandisk.obj", 0.05f, 0.019f);
+            //PrintPrecisionComparison("Max Planck", baseDir + @"\maxplanck.obj", 0.005f, 0f);
+
+            // Initial submission experiments
+            //filename = baseDir + @"\bunny_2k.obj";
             //minPrecision = 0.04f;
             //maxPrecision = 0.001f;
             //decrement = 0.005f;
@@ -47,7 +58,7 @@ namespace SpanCompression
             //Experiment01();
             //var elapsed1 = sw.Elapsed.TotalSeconds;
 
-            //filename = @"C:\Data\Common\Simplified\armadillo2_10000.obj";
+            //filename = baseDir + @"\armadillo_10k.obj";
             //minPrecision = 0.008f;
             //maxPrecision = 0f;
             //decrement = 0.001f;
@@ -55,7 +66,7 @@ namespace SpanCompression
             //Experiment01();
             //var elapsed2 = sw.Elapsed.TotalSeconds;
 
-            //filename = @"C:\Data\Common\lion.obj";
+            //filename = baseDir + @"\lion.obj";
             //minPrecision = 0.05f;
             //maxPrecision = 0f;
             //decrement = 0.01f;
@@ -63,15 +74,15 @@ namespace SpanCompression
             //Experiment01();
             //var elapsed3 = sw.Elapsed.TotalSeconds;
 
-            filename = @"C:\Data\Common\fandisk.obj";
-            minPrecision = 0.05f;
-            maxPrecision = 0.019f;
-            decrement = 0.01f;
-            measurements = 2;
-            Experiment01();
-            var elapsed4 = sw.Elapsed.TotalSeconds;
+            //filename = baseDir + @"\fandisk.obj";
+            //minPrecision = 0.05f;
+            //maxPrecision = 0.001f;
+            //decrement = 0.01f;
+            //measurements = 16;
+            //Experiment01();
+            //var elapsed4 = sw.Elapsed.TotalSeconds;
 
-            //filename = @"C:\Data\Common\maxplanck.obj";
+            //filename = baseDir + @"\maxplanck.obj";
             //minPrecision = 0.005f;
             //maxPrecision = 0f;
             //decrement = 0.001f;
@@ -83,27 +94,132 @@ namespace SpanCompression
             //PrettyTime("armadillo", elapsed2);
             //PrettyTime("lion", elapsed3);
             //PrettyTime("fandisk", elapsed4);
-            //PrettyTime("planck", elapsed5);
+            //PrettyTime("maxplanck", elapsed5);
 
+            // >100k Verts experiments
+            //RecommendExperimentSettings(baseDir + @"\xyzrgb_dragon_100k.obj");
+            //RecommendExperimentSettings(baseDir + @"\neptune_100k.obj");
+
+
+
+            //filename = baseDir + @"\xyzrgb_dragon_100k.obj";
+            //minPrecision = 0.02f;
+            //maxPrecision = 0.001f;
+            //decrement = 0.002f;
+            //measurements = 16;
+            //Experiment01();
+            //var elapsed8 = sw.Elapsed.TotalSeconds;
+            //PrettyTime("dragon", elapsed8);
+
+
+            filename = baseDir + @"\neptune_100k.obj";
+            minPrecision = 0.75f;
+            maxPrecision = 0.05f;
+            decrement = 0.075f;
+            measurements = 16;
+            Experiment01();
+            var elapsed9 = sw.Elapsed.TotalSeconds;
+            PrettyTime("neptune", elapsed9);
+
+
+
+            // Generating figures
+            //filename = baseDir + @"\maxplanck.obj";
             //ExportColoredUncertaintyMesh(filename, 0.004f, EvaluationMode.Corner, "max_corner.obj");
             //ExportColoredUncertaintyMesh(filename, 0.004f, EvaluationMode.Halton, "max_halton.obj");
             //ExportColoredUncertaintyMesh(filename, 0.004f, EvaluationMode.Neural, "max_neural.obj");
 
+            //filename = baseDir + @"\armadillo_10k.obj";
+            //minPrecision = 0.008f;
             //ExportExpectedAdvantageMesh(filename, minPrecision, EvaluationMode.Corner, "arm_expa_corner.obj");
             //ExportExpectedAdvantageMesh(filename, minPrecision, EvaluationMode.Halton, "arm_expa_halton.obj");
             //ExportExpectedAdvantageMesh(filename, minPrecision, EvaluationMode.Neural, "arm_expa_neural.obj");
 
+            //filename = baseDir + @"\maxplanck.obj";
+            //minPrecision = 0.005f;
             //int refinements = 41130;
             //RunExactRefinementsAndExport(filename, minPrecision, EvaluationMode.Halton, refinements, $"maxplanck_refined_halton_{refinements}.obj");
             //RunExactRefinementsAndExport(filename, minPrecision, EvaluationMode.Corner, refinements, $"maxplanck_refined_corner_{refinements}.obj");
             //RunExactRefinementsAndExport(filename, minPrecision, EvaluationMode.Neural, refinements, $"maxplanck_refined_neural_{refinements}.obj");
 
-            //EvaluateDirectoryMetrics(@"C:\Users\adria\Desktop\imp max\meshes");
+            //EvaluateDirectoryMetrics(@"E:\Workspaces\NormalUncertainty2026\.Revision\Figures\06 MaxPlanck Refinements");
+        }
+
+        private static void RecommendExperimentSettings(string filepath)
+        {
+            var mesh = ObjLoader.Load(filepath);
+
+            // 1. Calculate Average Edge Length using your helper method
+            double avgEdge = GetAverageEdgeLength(mesh);
+
+            string name = Path.GetFileNameWithoutExtension(filepath);
+
+            Console.WriteLine($"\n*** Recommended Settings for {name} ***");
+            Console.WriteLine($"Avg Edge Length: {avgEdge:F5}");
+
+            // 2. Generate Options
+            double[] multipliers = { 0.50, 0.35, 0.25 };
+            string[] labels = { "Aggressive (0.50x)", "Balanced (0.35x)", "Conservative (0.25x)" };
+
+            for (int i = 0; i < multipliers.Length; i++)
+            {
+                float recMin = (float)(avgEdge * multipliers[i]);
+                float recMax = (float)(avgEdge * 0.01);
+
+                recMin = (float)Math.Round(recMin, 3);
+                recMax = (float)Math.Round(recMax, 4);
+
+                float recDec = (float)Math.Round((recMin - recMax) / 15.0f, 4);
+
+                Console.WriteLine($"\n// [{labels[i]}] Copy-paste configuration:");
+                Console.WriteLine($"filename = baseDir + @\"\\{Path.GetFileName(filepath)}\";");
+                Console.WriteLine($"minPrecision = {recMin}f;");
+                Console.WriteLine($"maxPrecision = {recMax}f;");
+                Console.WriteLine($"decrement = {recDec}f;");
+                Console.WriteLine($"measurements = 16;");
+                Console.WriteLine($"Experiment01();");
+            }
+        }
+
+        private static double GetAverageEdgeLength(Mesh mesh)
+        {
+            // HashSet ensures we only measure each shared edge exactly once
+            var uniqueEdges = new HashSet<(int, int)>();
+
+            foreach (var face in mesh.Faces)
+            {
+                // Sort indices so (1, 2) and (2, 1) are treated as the same edge
+                uniqueEdges.Add(face.i1 < face.i2 ? (face.i1, face.i2) : (face.i2, face.i1));
+                uniqueEdges.Add(face.i2 < face.i3 ? (face.i2, face.i3) : (face.i3, face.i2));
+                uniqueEdges.Add(face.i3 < face.i1 ? (face.i3, face.i1) : (face.i1, face.i3));
+            }
+
+            double totalLength = 0.0;
+            foreach (var edge in uniqueEdges)
+            {
+                var v1 = mesh.Vertices[edge.Item1];
+                var v2 = mesh.Vertices[edge.Item2];
+                totalLength += Vector3.Distance(v1, v2);
+            }
+
+            return totalLength / uniqueEdges.Count;
+        }
+
+        private static void PrintPrecisionComparison(string name, string path, float minP, float maxP)
+        {
+            var mesh = ObjLoader.Load(path);
+            var avgEdge = GetAverageEdgeLength(mesh);
+
+            Console.WriteLine($"--- {name} ---");
+            Console.WriteLine($"Avg Edge Length: {avgEdge:F5}");
+            Console.WriteLine($"Min Precision:   {minP:F5} (Ratio: {minP / avgEdge:F2}x edge length)");
+            Console.WriteLine($"Max Precision:   {maxP:F5} (Ratio: {maxP / avgEdge:F2}x edge length)\n");
         }
 
         public static void PrettyTime(string name, double totalSeconds)
         {
-            Console.WriteLine($"{name}\t.....\t{totalSeconds}s");
+            TimeSpan t = TimeSpan.FromSeconds(totalSeconds);
+            Console.WriteLine($"{name}\t.....\t{totalSeconds}s ({(int)t.TotalMinutes}m {t.Seconds}s)");
         }
 
         public static void EvaluateDirectoryMetrics(string directoryPath)
@@ -216,8 +332,24 @@ namespace SpanCompression
             var expc = new ExpectedAdvantageComponent[faceCount];
             var pq = new PriorityQueue<ExpectedAdvantage>(Comparer<ExpectedAdvantage>.Default);
 
-            bool useNeural = mode == EvaluationMode.Neural;
-            bool useHalton = mode == EvaluationMode.Halton;
+            bool useNeural = false;
+            bool useHalton = false;
+
+            switch (mode)
+            {
+                case EvaluationMode.Corner:
+                    useNeural = false;
+                    useHalton = false;
+                    break;
+                case EvaluationMode.Halton:
+                    useNeural = false;
+                    useHalton = true;
+                    break;
+                case EvaluationMode.Neural:
+                    useNeural = true;
+                    useHalton = true;
+                    break;
+            }
 
             if (useNeural && NeuralNet == null)
                 throw new InvalidOperationException("NeuralNet must be initialized before using Neural mode.");
@@ -536,7 +668,7 @@ namespace SpanCompression
             if (totalHits > 0)
             {
                 double neuralPercentage = (double)neuralHits / totalHits * 100;
-                Console.WriteLine($"Neural utilization: {neuralPercentage:F2}%");
+                Console.WriteLine($"Neural utilization: {neuralPercentage:F6}%");
             }
             else
             {
@@ -550,34 +682,30 @@ namespace SpanCompression
         public static string CreateOutputDirectory()
         {
             var timestamp = DateTime.Now.ToString("-dd-MM-yyyy-(HH-mm-ss)");
-            var outputDir = Directory.CreateDirectory($"output/{timestamp}");
+            var name = Path.GetFileNameWithoutExtension(filename);
+            var outputDir = Directory.CreateDirectory($"output/{timestamp} {name}");
             var outputDirPath = outputDir.FullName;
             return outputDirPath;
         }
 
         private static void Experiment01()
         {
-            // Parameters:
+            sw.Reset();
+
             var outputDir = CreateOutputDirectory();
+            Utils.OpenFileExplorer(outputDir);
 
-            var sampler = new CornerSampler();
-            var originalMesh = ObjLoader.Load(filename);
-            var neighborhoodProvider = new NeighborhoodProvider(originalMesh);
-
-            using (var sw = new StreamWriter($"{outputDir}/log.txt"))
+            using (var logWriter = new StreamWriter($"{outputDir}/log.txt"))
             {
-                sw.WriteLine("Input file: " + filename);
-                sw.WriteLine("Initial precision: " + minPrecision);
-                sw.WriteLine("Target precision: " + maxPrecision);
-                sw.WriteLine("Decrement by: " + decrement);
-                sw.WriteLine("Measurements: " + measurements);
-                sw.WriteLine(sampler);
+                // Parameters:
+                logWriter.WriteLine("Input file: " + filename);
+                logWriter.WriteLine("Initial precision: " + minPrecision);
+                logWriter.WriteLine("Target precision: " + maxPrecision);
+                logWriter.WriteLine("Decrement by: " + decrement);
+                logWriter.WriteLine("Measurements: " + measurements);
+                logWriter.WriteLine($"UseHalton: {UseHalton}");
+                logWriter.WriteLine($"UseNeural: {UseNeural}");
             }
-
-            Utils.OpenFileExplorer();
-
-            long bitsFirst;
-            long bitsLast;
 
             // First encode meshes with edgebreaker and measure all metrics
             string[] metrics = ["DAME", "DAME -p", "FMPD", "MSDM", "MSDM2", "MSE", "MaxErr", "NUNC", "Improvements", "Time"];
@@ -596,6 +724,12 @@ namespace SpanCompression
                 y2[i] = [];
                 y3[i] = [];
             }
+
+            var sampler = new CornerSampler();
+            var originalMesh = ObjLoader.Load(filename);
+
+            long bitsFirst;
+            long bitsLast;
 
             RunEdgebreaker(outputDir, filename, minPrecision, maxPrecision, decrement, sampler, originalMesh, metrics, x1, y1);
 
@@ -617,9 +751,9 @@ namespace SpanCompression
                 return;
             }
 
-            sw.Reset();
             sw.Start();
 
+            var neighborhoodProvider = new NeighborhoodProvider(originalMesh);
             var coarseMesh = new CoarseMesh(edgebreakerOutput, minPrecision);
             var predictor1 = new SimplePredictor(coarseMesh, neighborhoodProvider);
             var predictor2 = new ParallelogramAveragePredictor(coarseMesh, neighborhoodProvider.cornerTable);
@@ -706,81 +840,66 @@ namespace SpanCompression
             for (int i = 0; i < cellCount; i++)
                 improved[i] = new double[3];
 
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
+            long nextEncodeAt = 0;
 
             while (true)
             {
-                if (Math.Min(usedBits1, usedBits2) >= checkpoints[checkpoint])
+                // ==========================================
+                // 1. ARITHCODER EVALUATION
+                // ==========================================
+                if (improvements >= nextEncodeAt)
                 {
                     sw.Stop();
 
-                    var time = stopwatch.Elapsed.TotalSeconds;
+                    var bits1 = predictor1.GetBooleans();
+                    using var ms1 = new MemoryStream();
+                    ArithCoder.encode(bits1, ms1);
+                    long acBits1 = ms1.Position * 8;
 
-                    Console.WriteLine($"Checkpoint {checkpoint} at {checkpoints[checkpoint]} bits and {improvements} improvements.");
-                    Console.WriteLine($"  - Simple predictor used {usedBits1} bits.");
-                    Console.WriteLine($"  - Paral. predictor used {usedBits2} bits.");
+                    var bits2 = predictor2.GetBooleans();
+                    using var ms2 = new MemoryStream();
+                    ArithCoder.encode(bits2, ms2);
+                    long acBits2 = ms2.Position * 8;
 
-                    var fnMesh = $"{outputDir}/NU_{improvements}.obj";
-                    var fnLog1 = $"{outputDir}/NU_{usedBits1:000000}_({improvements}).1.txt";
-                    var fnLog2 = $"{outputDir}/NU_{usedBits2:000000}_({improvements}).2.txt";
+                    usedBits1 = Math.Min(bitsFirst + improvements, bitsFirst + acBits1) + 1;
+                    usedBits2 = Math.Min(bitsFirst + improvements, bitsFirst + acBits2) + 1;
 
-                    cmesh = coarseMesh.ToMesh();
-                    cmesh.ColorByInverseChannelIntensity(improved);
-                    cmesh.Write(fnMesh);
+                    long currentBits = Math.Min(usedBits1, usedBits2);
 
-                    predictor1.Write(fnLog1);
-                    predictor2.Write(fnLog2);
+                    // Checkpoint Trigger
+                    if (currentBits >= checkpoints[checkpoint])
+                    {
+                        var time = sw.Elapsed.TotalSeconds;
 
-                    var dame1 = Metrics.DAME(filename, fnMesh);
-                    var dame2 = Metrics.DAME(filename, fnMesh, true);
-                    var fmpd = Metrics.FMPD(filename, fnMesh);
-                    var msdm1 = Metrics.MSDM(filename, fnMesh);
-                    var msdm2 = Metrics.MSDM2(filename, fnMesh);
-                    var mse = Metrics.MSE(originalMesh, cmesh);
-                    var maxerr = Metrics.MaxErr(originalMesh, cmesh);
-                    var nunc = 0; // Metrics.NUNC(coarseMesh, sampler);
+                        SaveCheckpointMetrics(
+                            checkpoint, checkpoints, improvements, usedBits1, usedBits2, time,
+                            outputDir, filename, coarseMesh, improved,
+                            predictor1, predictor2, originalMesh, metrics,
+                            x1, y1, x2, y2, x3, y3
+                        );
 
-                    x2.Add(usedBits1);
-                    x3.Add(usedBits2);
+                        checkpoint++;
+                        if (checkpoint >= checkpoints.Length)
+                            break;
+                    }
 
-                    y2[0].Add(dame1);
-                    y2[1].Add(dame2);
-                    y2[2].Add(fmpd);
-                    y2[3].Add(msdm1);
-                    y2[4].Add(msdm2);
-                    y2[5].Add(mse);
-                    y2[6].Add(maxerr);
-                    y2[7].Add(0);
-                    //y2[7].Add(nunc.Values.Sum());
-                    y2[8].Add(improvements);
-                    y2[9].Add(time);
+                    // Calculate the absolute minimum safe distance to sleep
+                    long distance = checkpoints[checkpoint] - Math.Min(usedBits1, usedBits2);
 
-                    y3[0].Add(dame1);
-                    y3[1].Add(dame2);
-                    y3[2].Add(fmpd);
-                    y3[3].Add(msdm1);
-                    y3[4].Add(msdm2);
-                    y3[5].Add(mse);
-                    y3[6].Add(maxerr);
-                    y3[7].Add(0);
-                    //y3[7].Add(nunc.Values.Sum());
-                    y3[8].Add(improvements);
-                    y3[9].Add(time);
+                    // Take a step covering 50% of the remaining distance
+                    long step = (long)(distance * 0.5);
 
-                    WriteMetrics(x2, y2, metrics, "nunc.predictor1", outputDir, filename);
-                    WriteMetrics(x3, y3, metrics, "nunc.predictor2", outputDir, filename);
+                    if (distance <= 30)
+                        step = 1;
 
-                    Plot(x1, y1, x2, y2, metrics, "edgebreaker", "nunc.predictor1", outputDir, filename);
-                    Plot(x1, y1, x3, y3, metrics, "edgebreaker", "nunc.predictor2", outputDir, filename);
+                    nextEncodeAt = improvements + Math.Max(1L, step);
 
                     sw.Start();
-                    stopwatch.Restart();
-                    checkpoint++;
-                    if (checkpoint >= checkpoints.Length)
-                        break;
                 }
 
+                // ==========================================
+                // 2. REFINEMENT STEP
+                // ==========================================
                 improvements++;
 
                 var max = pq.PopMaximum();
@@ -812,34 +931,71 @@ namespace SpanCompression
                     pq.Update(expa[3 * vi + 1]);
                     pq.Update(expa[3 * vi + 2]);
                 }
-
-                var bits1 = predictor1.GetBooleans();
-                var bits2 = predictor2.GetBooleans();
-
-                // Check how many bits we are using right now
-                var ms1 = new MemoryStream();
-                ArithCoder.encode(bits1.ToArray(), ms1);
-                var acBits1 = ms1.Position * 8;
-
-                // Check how many bits we are using right now
-                var ms2 = new MemoryStream();
-                ArithCoder.encode(bits2.ToArray(), ms2);
-                var acBits2 = ms2.Position * 8;
-
-                // For small amounts of improvements and small models etc, Arithcoder may have a bigger overhead
-                // than the bit savings it can actually provide
-                // Therefore we can pick whether to use it or not (choose the one that uses fewer bits).
-                // The toggle is covered by the +1
-                // I mean I might be overthinking this ngl but this feels kinda like the free-ish best of both worlds
-                usedBits1 = Math.Min(bitsFirst + improvements, bitsFirst + acBits1) + 1;
-                usedBits2 = Math.Min(bitsFirst + improvements, bitsFirst + acBits2) + 1;
-
-                if (improvements % 10 == 0)
-                    Console.WriteLine($"Used bits: {usedBits1} {usedBits2}, Improvements: {improvements}");
             }
 
-            stopwatch.Stop();
+            sw.Stop();
             PrintAndResetHitStats();
+        }
+
+        private static void SaveCheckpointMetrics(
+            int checkpoint, long[] checkpoints, long improvements, long usedBits1, long usedBits2, double time,
+            string outputDir, string filename, CoarseMesh coarseMesh, double[][] improved,
+            APredictor predictor1, APredictor predictor2, Mesh originalMesh, string[] metrics,
+            List<long> x1, List<double>[] y1, List<long> x2, List<double>[] y2, List<long> x3, List<double>[] y3)
+        {
+            Console.WriteLine($"Checkpoint {checkpoint} at {checkpoints[checkpoint]} bits and {improvements} improvements.");
+            Console.WriteLine($"  - Simple predictor used {usedBits1} bits.");
+            Console.WriteLine($"  - Paral. predictor used {usedBits2} bits.");
+
+            var fnMesh = $"{outputDir}/NU_{improvements}.obj";
+            var fnLog1 = $"{outputDir}/NU_{usedBits1:000000}_({improvements}).1.txt";
+            var fnLog2 = $"{outputDir}/NU_{usedBits2:000000}_({improvements}).2.txt";
+
+            var cmesh = coarseMesh.ToMesh();
+            cmesh.ColorByInverseChannelIntensity(improved);
+            cmesh.Write(fnMesh);
+
+            predictor1.Write(fnLog1);
+            predictor2.Write(fnLog2);
+
+            var dame1 = Metrics.DAME(filename, fnMesh);
+            var dame2 = Metrics.DAME(filename, fnMesh, true);
+            var fmpd = Metrics.FMPD(filename, fnMesh);
+            var msdm1 = Metrics.MSDM(filename, fnMesh);
+            var msdm2 = Metrics.MSDM2(filename, fnMesh);
+            var mse = Metrics.MSE(originalMesh, cmesh);
+            var maxerr = Metrics.MaxErr(originalMesh, cmesh);
+
+            x2.Add(usedBits1);
+            x3.Add(usedBits2);
+
+            y2[0].Add(dame1);
+            y2[1].Add(dame2);
+            y2[2].Add(fmpd);
+            y2[3].Add(msdm1);
+            y2[4].Add(msdm2);
+            y2[5].Add(mse);
+            y2[6].Add(maxerr);
+            y2[7].Add(0);
+            y2[8].Add(improvements);
+            y2[9].Add(time);
+
+            y3[0].Add(dame1);
+            y3[1].Add(dame2);
+            y3[2].Add(fmpd);
+            y3[3].Add(msdm1);
+            y3[4].Add(msdm2);
+            y3[5].Add(mse);
+            y3[6].Add(maxerr);
+            y3[7].Add(0);
+            y3[8].Add(improvements);
+            y3[9].Add(time);
+
+            WriteMetrics(x2, y2, metrics, "nunc.predictor1", outputDir, filename);
+            WriteMetrics(x3, y3, metrics, "nunc.predictor2", outputDir, filename);
+
+            Plot(x1, y1, x2, y2, metrics, "edgebreaker", "nunc.predictor1", outputDir, filename);
+            Plot(x1, y1, x3, y3, metrics, "edgebreaker", "nunc.predictor2", outputDir, filename);
         }
 
         private static void RunEdgebreaker(string outputDir, string filename, float minPrecision, float maxPrecision, float decrement, ISampler sampler, Mesh originalMesh, string[] metrics, List<long> x1, List<double>[] y1)
@@ -911,20 +1067,20 @@ namespace SpanCompression
 
         private static void WriteMetrics(List<long> x, List<double>[] y, string[] metrics, string method, string outputDir, string filename)
         {
-            using StreamWriter sw = new($"{outputDir}/{method}.metrics.txt", false);
-            sw.WriteLine(filename);
+            using StreamWriter metricWriter = new($"{outputDir}/{method}.metrics.txt", false);
+            metricWriter.WriteLine(filename);
 
-            sw.Write("bits;");
+            metricWriter.Write("bits;");
             foreach (var m in metrics)
-                sw.Write(m + ";");
-            sw.WriteLine();
+                metricWriter.Write(m + ";");
+            metricWriter.WriteLine();
 
             for (int i = 0; i < x.Count; i++)
             {
-                sw.Write($"{x[i]};");
+                metricWriter.Write($"{x[i]};");
                 for (int m = 0; m < metrics.Length; m++)
-                    sw.Write($"{y[m][i]};");
-                sw.WriteLine();
+                    metricWriter.Write($"{y[m][i]};");
+                metricWriter.WriteLine();
             }
         }
 
@@ -951,167 +1107,6 @@ namespace SpanCompression
             }
         }
 
-        private static void TestImproveEXPA()
-        {
-            //var filename = @"C:\Data\Common meshes\Simplified\bunny2_1000.obj";
-            var filename = @"C:\Data\Common meshes\Simplified\armadillo2_10000.obj";
-            //var filename = @"C:\Data\Common meshes\maxplanck.obj";
-
-            var precision = 0.003f;
-
-            var edgebreakerOutput = Edgebreaker.Run(filename, precision);
-            if (edgebreakerOutput == null)
-                return;
-
-            // Calculate initial normal uncertainty
-
-            var originalMesh = ObjLoader.Load(filename);
-            var coarseMesh = new CoarseMesh(edgebreakerOutput, precision);
-            var stopwatch = Stopwatch.StartNew();
-            var sampler = new CornerSampler();
-            //var nunc = Metrics.NUNC(coarseMesh, sampler);
-
-            // Calculate initial EXPA
-
-            int cellCount = coarseMesh.Cells.Length;
-            int faceCount = coarseMesh.Faces.Length;
-            var expa = new ExpectedAdvantage[3 * cellCount];
-            var expc = new ExpectedAdvantageComponent[faceCount];
-            var cmp = Comparer<ExpectedAdvantage>.Default;
-            var pq = new PriorityQueue<ExpectedAdvantage>(cmp);
-            var np = new NeighborhoodProvider(originalMesh);
-
-            Console.WriteLine("Init EXPC...");
-
-            for (int i = 0; i < faceCount; i++)
-            {
-                var face = coarseMesh.Faces[i];
-                var cells = new Dictionary<int, Cell>
-                {
-                    [face.i1] = coarseMesh.Cells[face.i1],
-                    [face.i2] = coarseMesh.Cells[face.i2],
-                    [face.i3] = coarseMesh.Cells[face.i3]
-                };
-                expc[i] = new ExpectedAdvantageComponent(i, cells, sampler);
-            }
-
-            Console.WriteLine("Init EXPA...");
-
-            for (int i = 0; i < cellCount; i++)
-            {
-                Console.WriteLine($"{i + 1}/{cellCount}");
-                //Console.WriteLine($"{i}");
-
-                var cell = coarseMesh.Cells[i];
-                var vf = np.VF(cell.ID);
-
-                expa[3 * i + 0] = new ExpectedAdvantage(cell.SpanX);
-                expa[3 * i + 1] = new ExpectedAdvantage(cell.SpanY);
-                expa[3 * i + 2] = new ExpectedAdvantage(cell.SpanZ);
-
-                for (int j = 0; j < vf.Length; j++)
-                {
-                    expc[vf[j]].RegisterObserver(expa[3 * i + 0]);
-                    expc[vf[j]].RegisterObserver(expa[3 * i + 1]);
-                    expc[vf[j]].RegisterObserver(expa[3 * i + 2]);
-                }
-            }
-
-            // Color by current EXPA
-
-            var cmesh = coarseMesh.ToMesh();
-            var values = new double[cellCount][];
-
-            for (int i = 0; i < cellCount; i++)
-            {
-                values[i] = new double[3];
-                values[i][0] = expa[3 * i + 0].Evaluate();
-                values[i][1] = expa[3 * i + 1].Evaluate();
-                values[i][2] = expa[3 * i + 2].Evaluate();
-            }
-
-            cmesh.ColorByInverseChannelIntensity(values);
-            cmesh.Write("initial_expa.obj");
-            Utils.OpenFileExplorer();
-
-            // Add all to priority queue by EXPA
-
-            Console.WriteLine("Init PQ...");
-
-            for (int i = 0; i < expa.Length; i++)
-            {
-                pq.Add(expa[i]);
-            }
-
-            //for (int i = 0; i < expa.Length; i++) // Try to take all out - result: sorted from highest to lowest
-            //{
-            //    var max = pq.PopMaximum();
-            //    Console.WriteLine(max.Evaluate());
-            //}
-
-            // Run improvement loop
-
-            Console.WriteLine("Improve...");
-
-            int improvements = 42_000;
-            var improved = new double[cellCount][];
-            for (int i = 0; i < cellCount; i++)
-                improved[i] = new double[3];
-
-            for (int imp = 0; imp < improvements; imp++)
-            {
-                Console.WriteLine($"{imp + 1}/{improvements}");
-
-                var max = pq.PopMaximum();
-                var id = max.Span.parent.ID;
-                var truth = GetTrueValue(max.Span, originalMesh.Vertices[id]);
-                max.Span.Split(truth);
-
-                int axi = (int)max.Span.axis;
-                improved[id][axi]++;
-
-                var vf = np.VF(id);
-                var vv = np.VV(id);
-
-                foreach (var fi in vf)
-                    expc[fi].Update();
-
-                pq.Add(max);
-
-                foreach (var vi in vv)
-                {
-                    pq.Update(expa[3 * vi + 0]);
-                    pq.Update(expa[3 * vi + 1]);
-                    pq.Update(expa[3 * vi + 2]);
-                }
-
-                if ((imp + 1) % 100 == 0)
-                {
-                    cmesh = coarseMesh.ToMesh();
-                    cmesh.ColorByInverseChannelIntensity(improved);
-                    cmesh.Write($"improved_{imp + 1}.obj");
-                    Utils.OpenFileExplorer();
-                }
-            }
-
-            //cmesh = coarseMesh.ToMesh();
-            //cmesh.ColorByInverseChannelIntensity(improved);
-            //cmesh.Write("improved_expa.obj");
-            //Utils.OpenFileExplorer();
-
-            stopwatch.Stop();
-            Console.WriteLine("Time: " + stopwatch.Elapsed.TotalSeconds + "s");
-
-            //var cmesh = coarseMesh.ToMesh();
-            //var values = nunc
-            //    .OrderBy(kv => kv.Key)
-            //    .Select(kv => kv.Value)
-            //    .ToArray();
-            //cmesh.ColorByValues(values);
-            //cmesh.Write("improved.obj");
-            //Utils.OpenFileExplorer();
-        }
-
         private static float GetTrueValue(Span span, Vector3 v)
         {
             return span.axis switch
@@ -1122,291 +1117,6 @@ namespace SpanCompression
                 _ => float.NaN,
             };
         }
-
-        [Obsolete]
-        private static void TestImproveNUNC()
-        {
-            //var filename = @"C:\Data\Common meshes\Simplified\bunny2_1000.obj";
-            var filename = @"C:\Data\Common meshes\Simplified\armadillo2_10000.obj";
-            //var filename = @"C:\Data\Common meshes\maxplanck.obj";
-
-            var precision = 0.003f;
-
-            var edgebreakerOutput = Edgebreaker.Run(filename, precision);
-            if (edgebreakerOutput == null)
-                return;
-
-            var realMesh = ObjLoader.Load(filename);
-            var coarseMesh = new CoarseMesh(edgebreakerOutput, precision);
-            var stopwatch = Stopwatch.StartNew();
-            var sampler = new CornerSampler();
-            var nunc = Metrics.NUNC(coarseMesh, sampler);
-            stopwatch.Stop();
-
-            var comparer = Comparer<Cell>
-                .Create((a, b) => nunc[a.ID].CompareTo(nunc[b.ID]));
-            var pq = new PriorityQueue<Cell>(comparer);
-
-            for (int i = 0; i < coarseMesh.Cells.Length; i++)
-            {
-                pq.Add(coarseMesh.Cells[i]);
-            }
-
-            var np = new NeighborhoodProvider(realMesh);
-
-            int improvements = 21;
-            int[] improved = new int[coarseMesh.Cells.Length];
-
-            for (int impr = 0; impr < improvements; impr++)
-            {
-                if (impr == 20)
-                    Console.WriteLine();
-
-                var max = pq.PopMaximum();
-                Console.WriteLine(nunc[max.ID]);
-                improved[max.ID]++;
-
-                //Console.WriteLine($"{max.ID}   {nunc[max.ID]}");
-
-                Console.WriteLine("B:");
-                Console.WriteLine($"{max.SpanX.Min} {max.SpanX.Max}");
-                Console.WriteLine($"{max.SpanY.Min} {max.SpanY.Max}");
-                Console.WriteLine($"{max.SpanZ.Min} {max.SpanZ.Max}");
-
-                max.SpanX.Split(realMesh.Vertices[max.ID].X);
-                max.SpanY.Split(realMesh.Vertices[max.ID].Y);
-                max.SpanZ.Split(realMesh.Vertices[max.ID].Z);
-
-                Console.WriteLine("A:");
-                Console.WriteLine($"{max.SpanX.Min} {max.SpanX.Max}");
-                Console.WriteLine($"{max.SpanY.Min} {max.SpanY.Max}");
-                Console.WriteLine($"{max.SpanZ.Min} {max.SpanZ.Max}");
-
-                int[] vf = np.VF(max.ID);
-                Face[] faces = new Face[vf.Length];
-
-                for (int i = 0; i < faces.Length; i++)
-                    faces[i] = coarseMesh.Faces[vf[i]];
-
-                HashSet<int> cellIndices = [];
-
-                for (int i = 0; i < faces.Length; i++)
-                {
-                    var f = faces[i];
-                    cellIndices.Add(f.i1);
-                    cellIndices.Add(f.i2);
-                    cellIndices.Add(f.i3);
-                }
-
-                List<Cell> cells = [];
-                foreach (var cellIndex in cellIndices)
-                {
-                    cells.Add(coarseMesh.Cells[cellIndex]);
-                }
-
-                var newNunc = Metrics.NUNC([.. cells], faces, sampler);
-                nunc[max.ID] = newNunc[max.ID];
-
-                pq.Add(max);
-                Console.WriteLine(nunc[max.ID]);
-                Console.WriteLine();
-
-                //HashSet<int> cellIndices = [];
-                //HashSet<int> faceIndices = [];
-
-                //// Add all neighboring faces to max
-                //var vv = np.VV(max.ID);
-                //var vf = np.VF(max.ID);
-
-                //foreach (var faceIndex in vf)
-                //    faceIndices.Add(faceIndex);
-
-                //// Add all neighboring to neighboring vertices (k=2)
-                //foreach (var cellIndex in vv)
-                //{
-                //    vf = np.VF(cellIndex);
-                //    foreach (var faceIndex in vf)
-                //        faceIndices.Add(faceIndex);
-                //}
-
-                //// Add all cells mentioned in the face list
-                //foreach (var faceIndex in faceIndices)
-                //{
-                //    cellIndices.Add(coarseMesh.Faces[faceIndex].i1);
-                //    cellIndices.Add(coarseMesh.Faces[faceIndex].i2);
-                //    cellIndices.Add(coarseMesh.Faces[faceIndex].i3);
-                //}
-
-                //List<Cell> allCells = [];
-                //List<Face> allFaces = [];
-
-                //foreach (var faceIndex in faceIndices)
-                //    allFaces.Add(coarseMesh.Faces[faceIndex]);
-
-                //foreach (var cellIndex in cellIndices)
-                //    allCells.Add(coarseMesh.Cells[cellIndex]);
-
-                //var improved = Metrics.NUNC([..allCells], [..allFaces], sampler);
-                //nunc[max.ID] = improved[max.ID];
-                //pq.Update(max);
-
-                //foreach (var cellIndex in vv)
-                //{
-                //    nunc[cellIndex] = improved[cellIndex];
-                //    pq.Update(coarseMesh.Cells[cellIndex]);
-                //}
-            }
-
-            Console.WriteLine("Time: " + stopwatch.Elapsed.TotalSeconds + "s");
-
-            var cmesh = coarseMesh.ToMesh();
-            var values = nunc
-                .OrderBy(kv => kv.Key)
-                .Select(kv => kv.Value)
-                .ToArray();
-            cmesh.ColorByValues(values);
-            cmesh.Write("improved.obj");
-            Utils.OpenFileExplorer();
-
-            Console.WriteLine("Max improvements:" + improved.Max());
-        }
-
-        private static void TestCalculateNormalUncertainty()
-        {
-            //var filename = @"C:\Data\Common meshes\Simplified\bunny2_1000.obj";
-            var filename = @"C:\Data\Common meshes\Simplified\armadillo2_10000.obj";
-            //var filename = @"C:\Data\Common meshes\maxplanck.obj";
-
-            var precision = 0.003f;
-
-            var edgebreakerOutput = Edgebreaker.Run(filename, precision);
-            if (edgebreakerOutput == null)
-                return;
-
-            var coarseMesh = new CoarseMesh(edgebreakerOutput, precision);
-            var stopwatch = Stopwatch.StartNew();
-            var nunc = Metrics.NUNC(coarseMesh, new RandomSampler(4));
-            stopwatch.Stop();
-
-            Console.WriteLine("Time: " + stopwatch.Elapsed.TotalSeconds + "s");
-
-            var cmesh = coarseMesh.ToMesh();
-            var values = nunc
-                .OrderBy(kv => kv.Key)
-                .Select(kv => kv.Value)
-                .ToArray();
-            cmesh.ColorByValues(values);
-            cmesh.Write("normal_uncertainty.obj");
-            Utils.OpenFileExplorer();
-        }
-
-        private static void TestCoarseMesh()
-        {
-            var filename = @"C:\Data\Common meshes\bunny2.obj";
-            var precision = 0.003f;
-
-            var edgebreakerOutput = Edgebreaker.Run(filename, precision);
-            if (edgebreakerOutput == null)
-                return;
-
-            //var compressedMesh = ObjLoader.Load(edgebreakerOutput.OutputPath);
-            //compressedMesh.Write("coarse.obj");
-            //Utils.OpenWithMeshLab("coarse.obj");
-
-            var coarseMesh = new CoarseMesh(edgebreakerOutput, precision);
-            var cmesh = coarseMesh.ToMesh();
-            var cells = coarseMesh.CellsToMesh();
-            cmesh.Write("edgebreaker_cmesh.obj");
-            cells.Write("edgebreaker_cells.obj");
-            Utils.OpenFileExplorer();
-        }
-
-        private static void TestConcat()
-        {
-            // Define centers and sizes
-            List<Vector3> centers =
-            [
-                new Vector3(0, 0, 0),
-                new Vector3(2, 1, -1),
-                new Vector3(-3, 0.5f, 2),
-                new Vector3(1, 3, 1)
-            ];
-
-            List<Vector3> sizes =
-            [
-                new Vector3(1, 1, 1),
-                new Vector3(2, 1, 0.5f),
-                new Vector3(1, 2, 3),
-                new Vector3(0.5f, 0.5f, 0.5f)
-            ];
-
-            List<Mesh> cuboids = [];
-
-            for (int i = 0; i < centers.Count; i++)
-            {
-                var cuboid = new Cuboid(centers[i], sizes[i]);
-                cuboids.Add(cuboid);
-            }
-
-            var concat = Mesh.ConcatenateMeshes([.. cuboids]);
-            concat.Write("concat.obj");
-            Utils.OpenWithMeshLab("concat.obj");
-        }
-
-        private static void TestCuboid()
-        {
-            Vector3 center = new Vector3(-1, 3, 2);
-            Vector3 size = new Vector3(2, 1, 3); // Width (X), Height (Y), Depth (Z)
-            Mesh cuboid = new Cuboid(center, size);
-            cuboid.Write("cuboid.obj");
-            Utils.OpenWithMeshLab("cuboid.obj");
-        }
-
-        private static void TestEdgebreaker()
-        {
-            var filename = @"C:\Data\Common meshes\bunny2.obj";
-            var output = Edgebreaker.Run(filename, 0.01f);
-            Console.WriteLine(output?.ToString());
-            Utils.OpenWithMeshLab(output.OutputPath);
-        }
-
-        private static void TestMetrics()
-        {
-            Console.WriteLine("For two different (but similar) meshes:");
-            TestMetrics(false);
-            Console.WriteLine("For two of the same mesh:");
-            TestMetrics(true);
-        }
-
-        private static void TestMetrics(bool same)
-        {
-            string fn1, fn2;
-
-            if (same)
-            {
-                fn1 = @"C:\Data\Common meshes\armadillo.obj";
-                fn2 = @"C:\Data\Common meshes\armadillo.obj";
-            }
-            else
-            {
-                fn1 = @"C:\Data\Common meshes\bunny2.obj";
-                fn2 = @"C:\Data\Common meshes\bunny2 - Copy.obj";
-            }
-
-            var value = Metrics.DAME(fn1, fn2);
-            Console.WriteLine("DAME: " + value);
-
-            value = Metrics.DAME(fn1, fn2, true);
-            Console.WriteLine("DAME -p: " + value);
-
-            value = Metrics.MSDM(fn1, fn2);
-            Console.WriteLine("MSDM: " + value);
-
-            value = Metrics.MSDM2(fn1, fn2);
-            Console.WriteLine("MSDM2: " + value);
-
-            value = Metrics.FMPD(fn1, fn2);
-            Console.WriteLine("FMPD: " + value);
-        }
+        
     }
 }

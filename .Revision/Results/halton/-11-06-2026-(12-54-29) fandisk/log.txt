@@ -1,0 +1,7 @@
+Input file: E:\Workspaces\NormalUncertainty2026\.Revision\Data\fandisk.obj
+Initial precision: 0.05
+Target precision: 0.001
+Decrement by: 0.01
+Measurements: 16
+UseHalton: True
+UseNeural: False

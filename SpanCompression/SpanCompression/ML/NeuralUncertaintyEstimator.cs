@@ -46,14 +46,14 @@ namespace SpanCompression.ML
         /// </summary>
         public float Predict(Cell cellA, Cell cellB, Cell cellC)
         {
-            // 1 row * 14 features = 14 floats
-            float[] inputData = new float[14];
+            // 1 row * 15 features = 15 floats
+            float[] inputData = new float[15];
 
             // Fill features at offset 0
             FillFeatures(inputData, 0, cellA, cellB, cellC);
 
-            // Create Tensor with shape [1, 14]
-            var inputTensor = new DenseTensor<float>(inputData, new[] { 1, 14 });
+            // Create Tensor with shape [1, 15]
+            var inputTensor = new DenseTensor<float>(inputData, new[] { 1, 15 });
 
             // Setup Inputs
             var inputs = NamedOnnxValue.CreateFromTensor(_inputName, inputTensor);
@@ -71,39 +71,42 @@ namespace SpanCompression.ML
         /// </summary>
         private void FillFeatures(float[] data, int offset, Cell A, Cell B, Cell C)
         {
-            // Normalize relative to A
-            // A.Min -> (0,0,0)
-            // A.Size.X -> 1.0
-
             Vector3 shift = -A.Min;
-            
-            // Clamp to prevent scale exploding to Infinity when cells flatten
-            float sizeX = Math.Max(A.SpanX.Size, 1e-7f);
-            float scale = 1.0f / sizeX;
 
-            // Feature 0-1: A Normalized Size (Height, Depth)
-            data[offset + 0] = A.SpanY.Size * scale;
-            data[offset + 1] = A.SpanZ.Size * scale;
+            // Find the maximum dimension of Cell A to use as our scale factor
+            float dx = A.SpanX.Size;
+            float dy = A.SpanY.Size;
+            float dz = A.SpanZ.Size;
+            float maxSpan = MathF.Max(dx, MathF.Max(dy, dz));
 
-            // Feature 2-4: B Min (Normalized)
-            data[offset + 2] = (B.Min.X + shift.X) * scale;
-            data[offset + 3] = (B.Min.Y + shift.Y) * scale;
-            data[offset + 4] = (B.Min.Z + shift.Z) * scale;
+            // Clamp to prevent scale exploding to Infinity
+            maxSpan = MathF.Max(maxSpan, 1e-7f);
+            float scale = 1.0f / maxSpan;
 
-            // Feature 5-7: B Max (Normalized)
-            data[offset + 5] = (B.Max.X + shift.X) * scale;
-            data[offset + 6] = (B.Max.Y + shift.Y) * scale;
-            data[offset + 7] = (B.Max.Z + shift.Z) * scale;
+            // Feature 0-2: A Normalized Size (Width, Height, Depth)
+            data[offset + 0] = dx * scale;
+            data[offset + 1] = dy * scale;
+            data[offset + 2] = dz * scale;
 
-            // Feature 8-10: C Min (Normalized)
-            data[offset + 8] = (C.Min.X + shift.X) * scale;
-            data[offset + 9] = (C.Min.Y + shift.Y) * scale;
-            data[offset + 10] = (C.Min.Z + shift.Z) * scale;
+            // Feature 3-5: B Min (Normalized)
+            data[offset + 3] = (B.Min.X + shift.X) * scale;
+            data[offset + 4] = (B.Min.Y + shift.Y) * scale;
+            data[offset + 5] = (B.Min.Z + shift.Z) * scale;
 
-            // Feature 11-13: C Max (Normalized)
-            data[offset + 11] = (C.Max.X + shift.X) * scale;
-            data[offset + 12] = (C.Max.Y + shift.Y) * scale;
-            data[offset + 13] = (C.Max.Z + shift.Z) * scale;
+            // Feature 6-8: B Max (Normalized)
+            data[offset + 6] = (B.Max.X + shift.X) * scale;
+            data[offset + 7] = (B.Max.Y + shift.Y) * scale;
+            data[offset + 8] = (B.Max.Z + shift.Z) * scale;
+
+            // Feature 9-11: C Min (Normalized)
+            data[offset + 9] = (C.Min.X + shift.X) * scale;
+            data[offset + 10] = (C.Min.Y + shift.Y) * scale;
+            data[offset + 11] = (C.Min.Z + shift.Z) * scale;
+
+            // Feature 12-14: C Max (Normalized)
+            data[offset + 12] = (C.Max.X + shift.X) * scale;
+            data[offset + 13] = (C.Max.Y + shift.Y) * scale;
+            data[offset + 14] = (C.Max.Z + shift.Z) * scale;
         }
 
         public void Dispose()

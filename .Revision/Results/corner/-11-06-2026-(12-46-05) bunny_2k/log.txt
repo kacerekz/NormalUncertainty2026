@@ -1,0 +1,7 @@
+Input file: E:\Workspaces\NormalUncertainty2026\.Revision\Data\bunny_2k.obj
+Initial precision: 0.04
+Target precision: 0.001
+Decrement by: 0.005
+Measurements: 16
+UseHalton: False
+UseNeural: False

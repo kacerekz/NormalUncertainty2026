@@ -17,8 +17,8 @@ namespace NormalUncertainty
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
-            //var generator = new AdaptiveHaltonDatasetGenerator3D();
-            //generator.Generate(1_000_000, "dataset.csv");
+            var generator = new AdaptiveHaltonDatasetGenerator3D();
+            generator.Generate(1_000_000, "dataset.csv");
 
             //var processedDir = @"C:\Users\adria\Desktop\NormalUncertainty2025-main\SpanCompression\SpanCompression\bin\Release\net8.0\output";
             //var processedDir = @"C:\Users\adria\Desktop\NormalUncertainty2025-main\SpanCompression\SpanCompression\bin\Release\net8.0\output\-21-02-2026-(20-40-57)";
@@ -28,13 +28,13 @@ namespace NormalUncertainty
             //var experiment = new Experiment09();
             //experiment.Run();
 
-            //var resultsDir = @"C:\Users\adria\Desktop\NormalUhttps://gemini.google.com/app/ef837b0c18aab872ncertainty2025-main\SpanCompression\SpanCompression\bin\Release\net8.0\output";
+            //var resultsDir = @"C:\Users\adria\Desktop\NormalUncertainty2025-main\SpanCompression\SpanCompression\bin\Release\net8.0\output";
             //var experiment = new Experiment10();
             //experiment.Run(resultsDir, 100_000, 100_000);
 
-            var resultsDir = @"C:\Users\adria\Desktop\NormalUncertainty2025-main\SpanCompression\SpanCompression\bin\Release\net8.0\output";
-            var experiment = new Experiment11();
-            experiment.Run(resultsDir, "11", 2_000);
+            //var resultsDir = @"C:\Users\adria\Desktop\NormalUncertainty2025-main\SpanCompression\SpanCompression\bin\Release\net8.0\output";
+            //var experiment = new Experiment11();
+            //experiment.Run(resultsDir, "11", 2_000);
 
             //var resultsDir = @"C:\Users\adria\Desktop\NormalUncertainty2025-main\SpanCompression\SpanCompression\bin\Release\net8.0\output";
             //var experiment = new Experiment12();
